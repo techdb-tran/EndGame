@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineSearch/*, AiOutlineHeart, AiOutlineShoppingCart*/ } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import "./header.css";
 
 const Header = () => {
@@ -67,12 +67,9 @@ const Header = () => {
                               className="search-field mb-0"
                               name="s"
                               value=""
-                              placeholder="Tìm kiếm trang sức"
+                              placeholder="Tìm kiếm sản phẩm"
                               autocomplete="off"
                             />
-                          </div>
-                          <div>
-                            <AiOutlineSearch/>
                           </div>
                         </div>
                       </form>
@@ -101,34 +98,29 @@ const Header = () => {
             <div className="flex-col flex-center">
               <ul className="nav header-nav header-bottom-nav nav-center  nav-line-bottom nav-uppercase">
                 <li className="menu-item">
-                  <a href="/" className="nav-top-link">
+                  <Link to="/home" className="nav-top-link">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu-item">
-                  <a href="/" className="nav-top-link">
-                    Trang sức
-                  </a>
+                  <Link to="/laptops" className="nav-top-link">
+                    Laptops
+                  </Link>
                 </li>
                 <li className="menu-item">
-                  <a href="/" className="nav-top-link">
-                    Trang sức cưới
-                  </a>
+                  <Link to="/headphones" className="nav-top-link">
+                    Headphones
+                  </Link>
                 </li>
                 <li className="menu-item">
-                  <a href="/" className="nav-top-link">
-                    Trang sức kim cương
-                  </a>
+                  <Link to="/tablets" className="nav-top-link">
+                    Tablets
+                  </Link>
                 </li>
                 <li className="menu-item">
-                  <a href="/" className="nav-top-link">
-                    Quà tặng
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="/" className="nav-top-link">
-                    Ưu đãi
-                  </a>
+                  <Link to="/wacth" className="nav-top-link">
+                    Watch
+                  </Link>
                 </li>
               </ul>
             </div>

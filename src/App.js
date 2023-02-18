@@ -1,15 +1,25 @@
-import './App.css';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Admin from "./layouts/AdminPage/Admin";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import BlogCard from "./components/BlogCard/BlogCard";
+import Layout from "./components/Layout/layout";
+import ProductCard from "./components/ProductCard/ProductCard";
+import Home from "./pages/Home/Home";
+// import Admin from "./layouts/AdminPage/Admin";
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <Footer/>
-      <Admin/>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index path="/home" element={<Home />} />
+            <Route path="/laptops" element={<BlogCard />} />
+            <Route path="/headphones" element={<ProductCard />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
