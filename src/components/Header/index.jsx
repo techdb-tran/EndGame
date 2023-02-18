@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+//import { AiOutlineSearch/*, AiOutlineHeart, AiOutlineShoppingCart*/ } from "react-icons/ai";
+>>>>>>> 3db4fbc (pen_3)
 import "./header.css";
 
 const Header = () => {

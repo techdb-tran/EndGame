@@ -1,0 +1,28 @@
+.layout{
+    min-height: 100vh;
+}
+.si-der .logoImg{
+    height: 128px;
+    margin: 16px;
+    background-image: URL('../../assets/logo.jpg');
+    background-repeat: no-repeat;
+}
+.menu,.si-der{
+    border: 1px solid gray;
+}
+.header{
+    padding: 0;
+}
+.content{
+    margin: 0 16px;
+}
+.bread-crumb{
+    margin: 16px 0;
+}
+.sta-tis-tical{
+    padding: 24px;
+    min-height: 360px;
+}
+.footer{
+    text-align: center;  
+}
