@@ -98,8 +98,8 @@ const Weekly = () => {
                 <Breadcrumb.Item>Weekly</Breadcrumb.Item>
             </Breadcrumb>
             <div className='span-btn'>
-                <Link to='/statistical'><span>Quarterly</span></Link>
-                <Link to='/statistical/monthly'><span>Monthly</span></Link>
+                <Link to='/admin/statistical'><span>Quarterly</span></Link>
+                <Link to='/admin/statistical/monthly'><span>Monthly</span></Link>
                 <span>Weekly</span>
             </div>
             <div className='top-dashboard'>

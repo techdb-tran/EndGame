@@ -1,17 +1,18 @@
 .layout{
     min-height: 100vh;
 }
+.si-der{
+    margin: 16px;
+    background-color: rgba(255,255,255,0.2);
+}
 .si-der .logoImg{
     height: 128px;
     margin: 16px;
-    background-image: URL('../../assets/logo.jpg');
+    background-image: URL('../../assets/imgAdmin/logo.jpg');
     background-repeat: no-repeat;
 }
 .menu,.si-der{
     border: 1px solid gray;
-}
-.header{
-    padding: 0;
 }
 .content{
     margin: 0 16px;
@@ -25,4 +26,15 @@
 }
 .footer{
     text-align: center;  
+}
+.site-layout .header{
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    color: aquamarine;
+    background-color: rgb(44, 43, 43);
+}
+.search{
+    margin-top: 10px ;
+    width: 300px;
 }

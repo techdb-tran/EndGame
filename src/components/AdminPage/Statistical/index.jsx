@@ -1,10 +1,8 @@
 import React from 'react'
-import { CaretUpOutlined, EyeOutlined, CaretDownOutlined, FileDoneOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { AreaChart, Area, Bar, BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import { Breadcrumb } from 'antd';
 import './Statistical.css'
 import { Link } from 'react-router-dom';
-import Card from 'antd/es/card/Card';
 const data = [
   {
     "name": "Q1",
@@ -37,8 +35,8 @@ const Statistical = () => {
       </Breadcrumb>
       <div className='span-btn'>
         <span>Quarterly</span>
-        <Link to='/statistical/monthly'><span>Monthly</span></Link>
-        <Link to='/statistical/weekly'><span>Weekly</span></Link>
+        <Link to='/admin/statistical/monthly'><span>Monthly</span></Link>
+        <Link to='/admin/statistical/weekly'><span>Weekly</span></Link>
       </div>
       <div className='top-dashboard'>
         <div className='revenue'>
@@ -75,31 +73,6 @@ const Statistical = () => {
             <Area type="monotone" dataKey="2022" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
           </AreaChart>
         </div>
-      </div>
-      <div className='card-statistical'>
-        <Card title="Order confirmation" bordered={false} style={{ width: 300 }}>
-          <span>
-            <h1>5 Order</h1>
-          </span>
-          <p>
-            <button><FileDoneOutlined />Detail</button>
-            <button><CheckCircleOutlined />Done</button>
-          </p>
-        </Card>
-        <Card title="Quarterly to date" bordered={false} style={{ width: 300 }}>
-          <span><h1>1820$</h1></span>
-          <p><CaretUpOutlined />+184$</p>
-        </Card>
-        <Card title="Site Traffic" bordered={false} style={{ width: 300 }}>
-          <span><h1>1065</h1>
-          </span>
-          <p><CaretDownOutlined />-98<EyeOutlined /></p>
-        </Card>
-        <Card title="Ads Budget" bordered={false} style={{ width: 300 }}>
-          <span><h1>990$</h1>
-          </span>
-          <p><CaretDownOutlined />-10$</p>
-        </Card>
       </div>
     </>
   )

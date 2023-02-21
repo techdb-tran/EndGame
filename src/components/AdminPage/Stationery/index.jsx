@@ -7,7 +7,7 @@ const Stationery = () => {
             <Breadcrumb.Item>Product</Breadcrumb.Item>
             <Breadcrumb.Item>Stationery</Breadcrumb.Item>
           </Breadcrumb>
-            Đây là  Stationery
+            Đây là  Stationary
         </div>
     )
 }
