@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.dash-board-wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+.left-content .card-item{
+    color: white;
+    background-color: rgb(44, 43, 43);
+    height: 180px;
+    margin: 10px 0;
+}
+.middle-content .card-item{
+    color: white;
+    background-color: rgb(44, 43, 43);
+    height: 243px;
+    margin: 10px 0;
+}
+.right-content .card-item{
+    height: 370px;
+    color: white;
+    background-color: rgb(44, 43, 43);
+    margin: 10px 0;
+}

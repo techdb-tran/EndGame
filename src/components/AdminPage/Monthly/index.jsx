@@ -101,9 +101,9 @@ const Monthly = () => {
                 <Breadcrumb.Item>Monthly</Breadcrumb.Item>
             </Breadcrumb>
             <div className='span-btn'>
-                <Link to='/statistical'><span>Quarterly</span></Link>
+                <Link to='/admin/statistical'><span>Quarterly</span></Link>
                 <span>Monthly</span>
-                <Link to='/statistical/weekly'><span>Weekly</span></Link>
+                <Link to='/admin/statistical/weekly'><span>Weekly</span></Link>
             </div>
             <div className='top-dashboard'>
                 <div className='revenue'>
