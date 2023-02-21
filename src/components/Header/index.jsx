@@ -82,13 +82,12 @@ const Header = () => {
             <div className="flex-col flex-right">
               <ul className="header-nav header-nav-main nav nav-right  nav-uppercase">
                 <li className="cart-item">
-                  <a
-                    href="/"
+                  <Link to="/cart"
                     title="Giỏ hàng"
                     className="header-cart-link is-small"
                   >
                     <span className="header-cart-title">Giỏ hàng </span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -99,28 +98,23 @@ const Header = () => {
             <div className="flex-col flex-center">
               <ul className="nav header-nav header-bottom-nav nav-center  nav-line-bottom nav-uppercase">
                 <li className="menu-item">
-                  <Link to="/home" className="nav-top-link">
+                  <Link to="/" className="nav-top-link">
                     Home
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/laptops" className="nav-top-link">
-                    Laptops
+                  <Link to="/product" className="nav-top-link">
+                    Our Store
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/headphones" className="nav-top-link">
-                    Headphones
+                  <Link to="/blogs" className="nav-top-link">
+                    Blog
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/tablets" className="nav-top-link">
-                    Tablets
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link to="/wacth" className="nav-top-link">
-                    Watch
+                  <Link to="/contact" className="nav-top-link">
+                    Contact
                   </Link>
                 </li>
               </ul>
