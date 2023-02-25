@@ -29,14 +29,14 @@ const Header = () => {
             <div className="flex-col flex-right">
               <ul className="nav nav-right nav-small nav-pills">
                 <li>
-                  <a href="/">
+                  <Link to="/wishlist">
                     <span>Danh sách yêu thích</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/">
+                  <Link to="/login">
                     <span>Đăng nhập</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
