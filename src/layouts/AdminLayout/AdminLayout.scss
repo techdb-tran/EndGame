@@ -1,0 +1,71 @@
+:root {
+    --primary-color: #f0f4f7; /* màu chính */
+    --text-color: black; /* màu văn bản */
+    --border-color-base: #cbb0b0; /* màu viền */
+    --card-color: rgba(58, 77, 160, 0.6);
+    --card-body-color: rgba(108, 110, 155, 0.6);
+  }
+  
+  [data-theme="dark"] {
+    --primary-color: #444654;
+    --text-color: white;
+    --border-color-base: #786b6b;
+    --card-color:  rgb(156, 205, 158);
+    --card-body-color: rgba(63, 210, 90, 0.6);
+  }
+.layout{
+    min-height: 100vh;
+    color: var(--text-color);
+    .footer{
+        text-align: center;
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        border-top: 1px solid var(--border-color-base);
+    }
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--primary-color);
+        border-bottom: 1px solid var(--border-color-base);
+        .header-left{
+            color: var(--text-color);
+        }
+        .header-right{
+            .avatar:hover{
+                border: 2px solid skyblue;
+            }
+            .logout{
+                height: 35px;
+                width: 35px;
+                margin: 30px;
+            }
+            .logout:hover{
+                color: red;
+            }
+        }
+        
+    }
+}
+.si-der{
+    .logoImg{
+        height: 128px;
+        margin: 16px;
+        background-image: URL('../../assets/imgAdmin/logo.jpg');
+        background-repeat: no-repeat;
+    }
+    .menu{
+        color: var(--text-color);
+        background-color: transparent;
+    }
+}
+.content{
+    padding: 24px;
+    min-height: 360px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+.bread-crumb{
+    margin: 16px 0;
+    color: var(--text-color);
+}
