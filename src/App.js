@@ -5,7 +5,7 @@ import Layout from "./components/Layout/layout";
 import Blog from "./pages/Blog/Blog";
 import Cart from "./pages/Cart/Cart";
 import Home from "./pages/Home/Home";
-import ProductsManagement from "./components/AdminPage/ProductsManagement";
+import ProductManagement from "./components/AdminPage/ProductManagement";
 import AdminLayout from "./layouts/AdminLayout";
 import Order from "./components/AdminPage/Order";
 import DashBoard from "./components/AdminPage/DashBoard";
@@ -39,7 +39,7 @@ function App() {
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<DashBoard />} />
-            <Route path="product-management" element={<ProductsManagement />} />
+            <Route path="product-management" element={<ProductManagement />} />
             <Route path="user-management" element={<UserManagement />} />
             <Route path="order" element={<Order />} />
           </Route>

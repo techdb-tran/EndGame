@@ -1,0 +1,116 @@
+{
+  "products": [
+    {
+      "productCode": "SP04",
+      "productName": "Búa",
+      "productType": "SamSung",
+      "productQuantity": 12,
+      "productImportPrice": 123,
+      "productSalePrice": 12343,
+      "id": 4
+    },
+    {
+      "productCode": "SP02",
+      "productName": "Máy đun nước",
+      "productType": "SamSung",
+      "productQuantity": 17,
+      "productImportPrice": 167,
+      "productSalePrice": 122,
+      "id": 5
+    },
+    {
+      "productCode": "SP03",
+      "productName": "Ly uống nước",
+      "productType": "Xiao Mi",
+      "productQuantity": 2,
+      "productImportPrice": 30000,
+      "productSalePrice": 40000,
+      "id": 6
+    },
+    {
+      "productCode": "SP05",
+      "productName": "Áo Thun",
+      "productType": "BPhone",
+      "productQuantity": 12,
+      "productImportPrice": 18,
+      "productSalePrice": 18,
+      "id": 7
+    },
+    {
+      "productCode": "SP06",
+      "productName": "JKKK",
+      "productType": "SamSung",
+      "productQuantity": 12,
+      "productImportPrice": 35000,
+      "productSalePrice": 40000,
+      "id": 8
+    }
+  ],
+  "users": [
+    {
+      "username": "pen",
+      "email": "kiddanbonggg@gmail.com",
+      "password": "12345Oke",
+      "gender": "Nam",
+      "phoneNumber": "0123456789",
+      "address": "730 HBT, Hoi An",
+      "id": 1
+    },
+    {
+      "email": "penthutam@gmail.com",
+      "password": "$2a$10$OFoWzT2.PebA2R/mSrwhDODnxu4GakmuPHuVJ6yWp7aQ.DYMv8.de",
+      "username": "pen thứ ba",
+      "gender": "Nữ",
+      "phoneNumber": 1111111111,
+      "address": "sdkjsdjkds",
+      "id": 2
+    },
+    {
+      "email": "penthutu@gmail.com",
+      "password": "$2a$10$iVx8uRzP/NyIJt923wgx..4Bz1Z8LeVWjPbk80wz3wCzJ67ye9gXW",
+      "username": "PEN",
+      "gender": "Khác",
+      "phoneNumber": 789788,
+      "address": "690 HBT",
+      "id": 3
+    },
+    {
+      "email": "penthuchin@gmail.com",
+      "password": "$2a$10$TCASpELJGb3/8DSdy/eD0uq15eKhpuM4yYqK4h5lV.v5RnpIUiSW6",
+      "username": "Sang",
+      "gender": "Nữ",
+      "phoneNumber": 12478946,
+      "address": "Tam kỳ",
+      "id": 5
+    },
+    {
+      "email": "penthumuoi@gmail.com",
+      "password": "$2a$10$DivJcJDmB02a0tEmwwlHredjj8NjPFm./fvvATYFVDQpi7Rm/YL/u",
+      "username": "OP",
+      "gender": "Nữ",
+      "phoneNumber": 3155555666,
+      "address": "18 TraN Phu",
+      "id": 6
+    }
+  ],
+  "orders": [
+    {
+      "orderCode": "DH001",
+      "productName": "Dao sinh tồn",
+      "type": "Living Tool",
+      "quantity": "9",
+      "img": "https://wetrek.vn/pic/products/Dao-sinh-ton-Gerber-Bear-Grylls-Ultimate-Pro-Fixed-Blade.jpg",
+      "status": "Đã Xác nhận",
+      "id": 1
+    },
+    {
+      "orderCode": "DH002",
+      "productName": "Ly sinh tồn",
+      "type": "Living Tool",
+      "quantity": "9",
+      "img": "https://wetrek.vn/pic/products/Dao-sinh-ton-Gerber-Bear-Grylls-Ultimate-Pro-Fixed-Blade.jpg",
+      "status": "Chờ xác nhận",
+      "id": 2
+    }
+  ]
+}
