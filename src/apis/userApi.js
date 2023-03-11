@@ -1,5 +1,20 @@
 import axios from "axios"
-import { BE_URL } from ".././components/constants/config"
+import { BE_URL } from "../constants/config"
+
+export const fetchInfoMe = async (email) => {
+    return await axios.get(`${BE_URL}users?email=${email}`); // GET user have email  = email
+};
+
+export const fetchLoginUser = async (user) => {
+    const res = await axios.post(`${BE_URL}login`, user);
+    return res.data
+}
+
+export const fetchRegisterUser = async (user) => {
+    const res = await axios.post(`${BE_URL}register`, user);
+    return res.data
+}
+
 export const fetchAllUserData = async () => {
     const { data } = await axios.get(`${BE_URL}users`);// gọi api và lấy tất cả data user
     return data;
