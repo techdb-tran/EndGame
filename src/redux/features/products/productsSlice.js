@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteProductById, fetchUpdateProductById, fetchAllDataProduct, fetchCreateProduct } from "../../../apis/productApi";
+import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct } from "../../../apis/productApi";
 
 
 const initialState = {
@@ -13,20 +13,10 @@ const initialState = {
 
 // Create middleware handle call API
 export const actFetchAllProduct = createAsyncThunk(
-  "users/fetchLogin",
+  "products/fetchAllProduct",
   async () => {
     const data = await fetchAllDataProduct();
     return data || [] ;
-  }
-);
-
-// Create middleware handle update product by id
-export const actUpdateProduct = createAsyncThunk(
-  "products/updateProduct",
-  async ({ id, payload }) => {
-    await fetchUpdateProductById(id, payload);
-    const data = await fetchAllDataProduct();
-    return data || [];
   }
 );
 
@@ -53,25 +43,8 @@ export const productsSlice = createSlice({
       state.isLoading = false;
       state.allProducts = action.payload || [];
     });
-
-    builder.addCase(actUpdateProduct.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(actUpdateProduct.rejected, (state) => {
-      state.errors = {
-        errors: "Đã xảy ra lỗi khi gọi API",
-        code: "",
-      };
-      state.isLoading = false;
-    });
-    builder.addCase(actUpdateProduct.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.allProducts = action.payload || [];
-    });
   },
 });
-
-// Create middleware handle create product
 export const actCreateProduct = (product) => async (dispatch) => {
   console.log(product, "create product");
   try {
@@ -79,23 +52,32 @@ export const actCreateProduct = (product) => async (dispatch) => {
     await fetchCreateProduct(product);
     await dispatch(actFetchAllProduct()); // Call Api và lấy all sản phẩm từ new data
   } catch (errors) {
-    // Handle error to show screen
     console.log(errors);
   } finally {
     dispatch(actUpdateLoadingCreate(false)); // Update status loading call api success
   }
 };
 
-// Create middleware handle delete product by id
 export const actDeleteProduct = (id) => async (dispatch) => {
   try {
-    await deleteProductById(id); // Call Api delete Product
-    dispatch(actFetchAllProduct()); // Call Api get All product to get new Data
+    await deleteProductById(id); 
+    dispatch(actFetchAllProduct()); 
   } catch (error) {
     console.log(error);
+  }finally {
+    dispatch(actUpdateLoadingCreate(false)); 
   }
 };
-
+export const actUpdateProduct = (id, product) => async (dispatch) => {
+  try {
+    await updateProductById(id, product);
+    dispatch(actFetchAllProduct());
+  }catch (error) {
+    console.log(error);
+  }finally {
+    dispatch(actUpdateLoadingCreate(false)); 
+  }
+};
 export const {actUpdateLoadingCreate} = productsSlice.actions;
 
 export default productsSlice.reducer;

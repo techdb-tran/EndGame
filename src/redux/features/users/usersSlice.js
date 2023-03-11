@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAllUserData, deleteUserById, fetchCreateUser } from "../../../apis/userApi";
+import { fetchAllUserData, deleteUserById, fetchCreateUser, fetchUpdateUserById } from "../../../apis/userApi";
 
 const initialState = {
   allUsers: [],
@@ -65,7 +65,22 @@ export const actDeleteUser = (id)=> async (dispatch)=>{
   }catch(error){
     console.log(error);
   }
+  finally{
+    dispatch(actUpdateLoadingCreate(false));
+  }
 }
+export const actUpdateUser = (id, user)=> async (dispatch)=>{
+  try{
+    await fetchUpdateUserById(id, user);//Call Api delete User
+    dispatch(actFetchAllUsers());//Call Api get All product to get new Data
+  }catch(error){
+    console.log(error);
+  }
+  finally{
+    dispatch(actUpdateLoadingCreate(false));
+  }
+}
+
 export const {actUpdateLoadingCreate} = usersSlice.actions;
 
 export default usersSlice.reducer;

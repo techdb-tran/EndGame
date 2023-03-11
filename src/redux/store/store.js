@@ -4,7 +4,7 @@ import productsReducer from '../features/products/productsSlice'
 import usersReducer from '../features/users/usersSlice'
 const store = configureStore({
   reducer: {
-    order: orderReducer,
+    orders: orderReducer,
     products: productsReducer,
     users: usersReducer,
   },

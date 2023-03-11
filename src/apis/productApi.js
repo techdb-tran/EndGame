@@ -15,7 +15,8 @@ export const fetchCreateProduct = async (product) =>{
   return await axios.post(`${BE_URL}products`, product); //truyền data product vào body để server nhận đc
 }
 //Edit product
-export const fetchUpdateProductById = async (id, payload)=>{
-  return await axios.put(`${BE_URL}products/${id}`, payload);
+export const updateProductById = async (id, product)=>{
+  const {data} = await axios.patch(`${BE_URL}products/${id}`, product);
+  return  data;
 }
 // Chức năng edit giống với chức năng thêm mới

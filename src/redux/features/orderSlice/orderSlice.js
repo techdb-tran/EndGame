@@ -2,28 +2,26 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchAllDataOrder, updateOrderStatus } from '../../../apis/orderApi';
 
 const initialState = {
-  orders: [],
+  allOrders: [],
   loading: false,
   error: null,
 };
 
 // Create middleware handle call API
 export const actFetchAllOrder = createAsyncThunk(
-  "orders/fetchLogin",
+  "allOrders/fetchOrders",
   async () => {
     const data = await fetchAllDataOrder();
     return data || [] ;
   }
 );
 export const actUpdateOrderStatus = createAsyncThunk(
-  'orders/updateOrderStatus',
+  'allOrders/updateOrderStatus',
   async ({ id, status }) => {
     const data = await updateOrderStatus(id, status);
     return data;
   }
 )
-
-
 const orderSlice = createSlice({
   name: 'orders',
   initialState,
@@ -35,7 +33,7 @@ const orderSlice = createSlice({
       })
       builder.addCase(actFetchAllOrder.fulfilled, (state, action) => {
         state.loading = false;
-        state.orders = action.payload;
+        state.allOrders = action.payload;
       })
       // Xử lý khi thực hiện lấy dữ liệu từ API thất bại
       builder.addCase(actFetchAllOrder.rejected, (state, action) => {
@@ -45,9 +43,9 @@ const orderSlice = createSlice({
       // Xử lý khi thực hiện cập nhật trạng thái đơn hàng từ API thành công
       builder.addCase(actUpdateOrderStatus.fulfilled, (state, action) => {
       const { id, status } = action.payload;
-      const index = state.orders.findIndex((order) => order.id === id);
+      const index = state.allOrders.findIndex((order) => order.id === id);
       if (index !== -1) {
-        state.orders[index].status = status;
+        state.allOrders[index].status = status;
       }
       });
      // Xử lý khi thực hiện cập nhật trạng thái đơn hàng từ API thất bại

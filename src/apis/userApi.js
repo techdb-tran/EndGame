@@ -15,5 +15,7 @@ export const fetchCreateUser = async (user) => {
     return await axios.post(`${ BE_URL }users`, user); //truyền data user vào body để server nhận đc
 }
 //Edit user
-export const fetchUpdateUserById = async (id) => {
+export const fetchUpdateUserById = async (id, user) => {
+    const {data}= await axios.patch(`${BE_URL}users/${id}`, user);
+    return data;
 }

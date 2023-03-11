@@ -12,14 +12,14 @@ const DashBoard = () => {
                 <Breadcrumb.Item>DashBoard</Breadcrumb.Item>
                 <Breadcrumb.Item>Detail</Breadcrumb.Item>
             </Breadcrumb>
-            <Row style={{display:'flex',justifyContent:'space-around', marginBottom:'20PX'}}>
+            <Row>
                 <DashboardCard/>
             </Row>
             <Row style={{display:'flex'}}>
-                <Col span={12}>
+                <Col span={24}>
                     <OrdersTable/>
                 </Col>
-                <Col span={8}>
+                <Col span={24}>
                     <RevenueChart/>
                 </Col>
             </Row>
