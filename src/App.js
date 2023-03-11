@@ -7,7 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import Home from "./pages/Home/Home";
 import ProductManagement from "./components/AdminPage/ProductManagement";
 import AdminLayout from "./layouts/AdminLayout";
-import Order from "./components/AdminPage/Order";
+import OrdersTab from "./components/AdminPage/OrdersTab";
 import DashBoard from "./components/AdminPage/DashBoard";
 import OurStore from "./pages/OurStore/OurStore";
 import UserManagement from "./components/AdminPage/UserManagement";
@@ -41,7 +41,7 @@ function App() {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="product-management" element={<ProductManagement />} />
             <Route path="user-management" element={<UserManagement />} />
-            <Route path="order" element={<Order />} />
+            <Route path="order" element={<OrdersTab/>} />
           </Route>
         </Routes>
       </BrowserRouter>

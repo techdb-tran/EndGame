@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
-import { Modal, Form, Input, Button, Select, InputNumber } from 'antd';
+import React, { useRef, useState } from 'react';
+import { Modal, Form, Input, Button, Select, InputNumber, Col } from 'antd';
 import { useDispatch } from 'react-redux';
-import { actCreateUser } from '../../../redux/features/users/usersSlice';
+import { actCreateUser, actUpdateUser } from '../../../redux/features/users/usersSlice';
+import UserTable from '../UserTable';
 
 const { Option } = Select;
 
 const UserForm = () => {
     const dispatch = useDispatch();
-
     const [form] = Form.useForm();
-
     const [modalVisible, setModalVisible] = useState(false);
+    const [isEditing, setEditing] = useState(false)
+    const idUpdateRef = useRef(null)
 
     const handleSubmitForm = (values) => {
         dispatch(actCreateUser(values));
         setModalVisible(false);
         form.resetFields();
     };
-
+    const handleUpdateForm = (values) => {
+        console.log(values)
+        form.setFieldsValue(values)
+        idUpdateRef.current = values.id
+        setEditing(true);
+        setModalVisible(true)
+    }
+    const handleSaveForm = (values) => {
+        dispatch(actUpdateUser(idUpdateRef.current, values))
+        setModalVisible(false);
+        form.resetFields();
+        setEditing(false)
+    }
     return (
         <>
-            <Button type="primary" onClick={() => setModalVisible(true)}>Thêm người dùng</Button>
+            <Col>
+                <Button type="primary" onClick={() => {
+                    setModalVisible(true)
+                    setEditing(false)
+                }}>Thêm người dùng</Button>
+            </Col>
             <Modal
-                title="Thêm người dùng"
+                title={isEditing ? "Sửa thông tin người dùng" : "Thêm người dùng"}
                 visible={modalVisible}
                 onCancel={() => setModalVisible(false)}
                 footer={null}
@@ -30,7 +48,7 @@ const UserForm = () => {
                 <Form
                     layout="vertical"
                     form={form}
-                    onFinish={handleSubmitForm}
+                    onFinish={isEditing ? handleSaveForm : handleSubmitForm}
                 >
                     <Form.Item
                         label="Tài khoản"
@@ -79,10 +97,11 @@ const UserForm = () => {
                         <Input />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary" htmlType="submit">Thêm người dùng</Button>
+                        <Button type="primary" htmlType="submit">{isEditing ? "Lưu" : "Thêm"}</Button>
                     </Form.Item>
                 </Form>
             </Modal>
+            <UserTable onUpdateUser={handleUpdateForm} />
         </>
     );
 };

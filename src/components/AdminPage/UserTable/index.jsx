@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Space, Button } from 'antd';
+import { Table, Space, Button, Col } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { actDeleteUser, actFetchAllUsers } from '../../../redux/features/users/usersSlice';
-const UserTable = () => {
-    const dispatch = useDispatch();
+import { actDeleteUser, actFetchAllUsers, actUpdateUser } from '../../../redux/features/users/usersSlice';
+import SearchManagement from '../SearchManagement';
+const UserTable = ({onUpdateUser}) => {
     const { allUsers, isLoading } = useSelector(state => state.users);
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(actFetchAllUsers());
-    }, []);
+    }, [dispatch]);
+
+    const reversedUser = useMemo(()=>{
+        return allUsers.slice().reverse()
+    },[allUsers])
+
 
     const handleDeleteUser = (id) => {
         dispatch(actDeleteUser(id));
     };
 
     const handleEditUser = (id) => {
-        console.log('Edit nè');
+        const user = allUsers.find(item => item.id===id);
+        dispatch(actUpdateUser(id))
+        onUpdateUser(user);
     };
     //ham pagination
     const [pagination, setPagination] = useState({
@@ -25,14 +33,33 @@ const UserTable = () => {
     const handleTableChange = (pagination) => {
         setPagination(pagination);
     };
+    
+    // Add Power to User data
+    const userData = reversedUser.map((user) => {
+        let power = "Customer";
+        if (user.isAdmin) {
+            power = "Admin";
+        }
+        return { ...user, power };
+    });
+        //HAM SEARCH
+        const [searchText, setSearchText] = useState('');
 
+        const handleSearch = (value) => {
+            setSearchText(value);
+        };
+        const filteredUsers = useMemo(() => {
+            return userData.filter((user) => {
+                return user.email.toLowerCase().includes(searchText.toLowerCase())
+                    || user.username.toLowerCase().includes(searchText.toLowerCase());
+            });
+        }, [userData, searchText]);
+    
     const columns = [
         {
             title: 'Họ và Tên',
             dataIndex: 'username',
             key: 'username',
-            sorter: (a, b) => a.username.localeCompare(b.username),
-            sortDirections: ['ascend', 'descend'],
         },
         {
             title: 'Email',
@@ -60,6 +87,11 @@ const UserTable = () => {
             key: 'address',
         },
         {
+            title: 'Power',
+            dataIndex: 'power',
+            key: 'power',
+        },
+        {
             title: 'Active',
             key: 'action',
             render: (text, record) => (
@@ -70,13 +102,16 @@ const UserTable = () => {
             ),
         },
     ];
-
+     
     return (
         <div>
+            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+            <Col span={5}><SearchManagement placeholder="search username or email" onSearch={handleSearch}/></Col>
+            </div>
             {isLoading ? (
                 <div>Loading...</div>
             ) : (
-                <Table columns={columns} dataSource={allUsers} rowKey="id" pagination={pagination}
+                <Table columns={columns} dataSource={filteredUsers} rowKey="id" pagination={pagination}
                     onChange={handleTableChange} />
             )}
         </div>

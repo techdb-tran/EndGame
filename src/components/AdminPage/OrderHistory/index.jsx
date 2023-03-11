@@ -1,6 +1,7 @@
-import { Table, DatePicker } from 'antd';
+import { Table, DatePicker, Tag } from 'antd';
 import { useState } from 'react';
 import moment from 'moment/moment';
+import { useSelector } from 'react-redux';
 
 const columns = [
   {
@@ -9,43 +10,60 @@ const columns = [
     key: 'orderCode',
   },
   {
+    title: 'Tên hàng hóa',
+    dataIndex: 'productName',
+    key: 'orderCode',
+  },
+  {
+    title: 'Loại hàng',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Tổng tiền hàng',
+    dataIndex: 'salesPrice',
+    key: 'salesPrice',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (status) => {
+      let color = '';
+      switch (status) {
+        case 'Chờ xác nhận':
+          color = 'orange';
+          break;
+        case 'Đang vận chuyển':
+          color = 'green';
+          break;
+        case 'Đã hoàn thành':
+          color = 'red';
+          break;
+        default:
+          break;
+      }
+      return (
+        <Tag color={color} key={status}>
+          {status.toUpperCase()}
+        </Tag>
+      );
+    },
+  },
+  {
     title: 'Ngày hoàn thành',
     dataIndex: 'completedDate',
     key: 'completedDate',
-  },
-  {
-    title: 'Số lượng',
-    dataIndex: 'quantity',
-    key: 'quantity',
-  },
+  }
 ];
 
-const data = [
-  {
-    key: '1',
-    orderCode: 'DH001',
-    completedDate: '2022-02-20',
-    quantity: 5,
-  },
-  {
-    key: '2',
-    orderCode: 'DH002',
-    completedDate: '2022-02-22',
-    quantity: 3,
-  },
-  {
-    key: '3',
-    orderCode: 'DH003',
-    completedDate: '2022-02-24',
-    quantity: 8,
-  },
-];
 
 const OrderHistory = () => {
-  const [filteredData, setFilteredData] = useState(data);
-
+  const {allOrders} = useSelector(state => state.orders);
+  const completedOrders = allOrders.filter(order=>order.status ==="Đã hoàn thành")
+  const [filteredData, setFilteredData] = useState(completedOrders);
   const handleDateChange = (date, dateString) => {
-    const filtered = data.filter(
+    const filtered = allOrders.filter(
       (item) =>
         moment(item.completedDate).isSameOrAfter(dateString, 'day') &&
         moment(item.completedDate).isSameOrBefore(dateString, 'day')

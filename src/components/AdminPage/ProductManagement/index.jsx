@@ -1,6 +1,5 @@
 import React from 'react';
 import ProductForm from '../ProductForm';
-import ProductTable from '../ProductTable';
 import { Breadcrumb } from 'antd';
 
 const ProductManagement = () => {
@@ -11,7 +10,6 @@ const ProductManagement = () => {
         <Breadcrumb.Item>Product Management</Breadcrumb.Item>
       </Breadcrumb>
       <ProductForm />
-      <ProductTable />
     </>
   )
 }

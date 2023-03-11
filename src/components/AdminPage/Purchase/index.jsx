@@ -1,23 +1,37 @@
 import React from 'react'
 import { Card } from 'antd'
-import { ArrowDownOutlined, ArrowUpOutlined, StockOutlined } from '@ant-design/icons'
+import { ArrowUpOutlined, StockOutlined } from '@ant-design/icons'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { actFetchAllProduct } from '../../../redux/features/products/productsSlice'
 const Purchase = () => {
+    const dispatch = useDispatch();
+    const {allProducts} = useSelector(state=>state.products)
+    console.log(allProducts)
+    useEffect(() => {
+        dispatch(actFetchAllProduct())
+    }, [dispatch]);
+    
+    const allPurchase =()=>{
+        let total = 0;
+        for (let i=0; i< allProducts.length; i++){
+            total = total +(allProducts[i].productImportPrice)*(allProducts[i].productQuantity)
+        }
+        return total;
+    }
     return (
         <>
             <Card>
                 <Card.Meta
                     title="Purchase"
-                    description="100"
+                    description={allPurchase()}
                     avatar={
                         <div>
-                            {true ? (
-                                <ArrowUpOutlined style={{ color: '#52c41a', fontSize: '48px' }} />
-                            ) : (
-                                <ArrowDownOutlined style={{ color: '#f5222d', fontSize: '48px' }} />
-                            )}
+                            <ArrowUpOutlined style={{ color: '#52c41a', fontSize: '48px' }} />
                             <StockOutlined style={{ color: '#faad14', fontSize: '32px' }} />
                         </div>
                     }
+                    style={{ fontSize: '20px', fontWeight: 'bold', color: '#f00' }}
                 />
             </Card>
         </>

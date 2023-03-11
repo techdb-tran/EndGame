@@ -44,6 +44,7 @@ const NewCustomer = () => {
                             <UsergroupAddOutlined style={{ color: '#13c2c2', fontSize: '32px' }} />
                         </div>
                     }
+                    style={{ fontSize: '20px', fontWeight: 'bold', color: '#f00' }}
                 />
             </Card>
         </>

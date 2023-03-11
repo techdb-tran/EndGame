@@ -1,9 +1,9 @@
 import React from 'react'
 import Search from 'antd/es/input/Search'
-const SearchManagement = () => {
+const SearchManagement = ({placeholder, onSearch}) => {
   return (
     <div>
-      <Search></Search>
+      <Search placeholder={placeholder} onSearch={onSearch}/>
     </div>
   )
 }

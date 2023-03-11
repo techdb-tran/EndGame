@@ -4,7 +4,7 @@ import TabPane from 'rc-tabs/lib/TabPanelList/TabPane';
 import LogisticsManagement from '../LogisticsManagement';
 import OrderList from '../OrderHistory';
 import OrdersTable from '../OrdersTable';
-const Order = () => {
+const OrdersTab = () => {
   const [activeTab, setActiveTab] = useState('1');
 
   function handleTabChange(activeKey) {
@@ -35,4 +35,4 @@ const Order = () => {
   )
 }
 
-export default Order
+export default OrdersTab
