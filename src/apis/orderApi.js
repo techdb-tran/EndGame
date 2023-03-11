@@ -1,5 +1,5 @@
 import axios from "axios"
-import {BE_URL} from ".././components/constants/config"
+import {BE_URL} from "../constants/config"
 export const fetchAllDataOrder = async ()=>{
   const {data} = await axios.get(`${BE_URL}orders`);// gọi api và lấy tất cả data
   return data;

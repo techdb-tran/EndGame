@@ -1,49 +1,66 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import Layout from "./components/Layout/layout";
-import Blog from "./pages/Blog/Blog";
-import Cart from "./pages/Cart/Cart";
-import Home from "./pages/Home/Home";
+import "./App.scss";
+import Cart from "./pages/CartPage/CartPage";
+import Home from "./pages/HomePage/HomePage";
 import ProductManagement from "./components/AdminPage/ProductManagement";
 import AdminLayout from "./layouts/AdminLayout";
 import OrdersTab from "./components/AdminPage/OrdersTab";
 import DashBoard from "./components/AdminPage/DashBoard";
-import OurStore from "./pages/OurStore/OurStore";
 import UserManagement from "./components/AdminPage/UserManagement";
-import SingleProduct from "./pages/SingleProduct/SingleProduct";
-import Login from "./pages/Login/Login";
-import Signup from "./pages/SignUp/SignUp";
-import Wishlist from "./pages/Wishlist/Wishlist";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-import SingleBlog from "./pages/SingleBlog/SingleBlog";
-import Checkout from "./pages/Checkout/Checkout";
+import ProductSingle from "./pages/ProductSinglePage/ProductSinglePage";
+import CategoryProduct from "./pages/CategoryProductPage/CategoryProductPage";
+import Search from "./pages/SearchPage/SearchPage";
+import Layout from "./layouts/UserLayout";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import WishlistPage from "./pages/WishlistPage/WishlistPage";
+import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        {/* <Header />
+        <Sidebar /> */}
+        {/* <Route> */}
+        {/* <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/product/:id" element={<ProductSingle />} />
+            <Route path="/category/:category" element={<CategoryProduct />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/search/:searchTerm" element={<Search />} />
+          </Route> */}
+        {/* <Route> */}
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout />} >
             <Route index element={<Home />} />
-            <Route path="product" element={<OurStore />} />
-            <Route path="blogs" element={<Blog />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="product/:id" element={<SingleProduct />} />
-            <Route path="blog/:id" element={<SingleBlog />} />
-            <Route path="wishlist" element={<Wishlist />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="forgot-password" element={<ForgotPassword />} />
-            <Route path="checkout" element={<Checkout />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/product/:id" element={<ProductSingle />} />
+            <Route path="/category/:category" element={<CategoryProduct />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/search/:searchTerm" element={<Search />} />
           </Route>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="dashboard" element={<DashBoard />} />
-            <Route path="product-management" element={<ProductManagement />} />
-            <Route path="user-management" element={<UserManagement />} />
-            <Route path="order" element={<OrdersTab/>} />
+          <Route>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="dashboard" element={<DashBoard />} />
+              <Route
+                path="product-management"
+                element={<ProductManagement />}
+              />
+              <Route path="user-management" element={<UserManagement />} />
+              <Route path="order" element={<OrdersTab />} />
+            </Route>
           </Route>
         </Routes>
+        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );
