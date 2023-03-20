@@ -20,7 +20,7 @@ const ProductForm = () => {
     form.resetFields();
     setEditing(false)
   };
-  const handleUpdateForm = (values) =>{
+  const handleUpdateForm = (values) => {
     // dispatch(actUpdateProduct(values))
     console.log(values);
     form.setFieldsValue(values)
@@ -28,8 +28,8 @@ const ProductForm = () => {
     setModalVisible(true)
     setEditing(true)
   }
-  const handleSaveForm = (values)=>{
-    console.log(idUpdateRef.current,'hi')
+  const handleSaveForm = (values) => {
+    console.log(idUpdateRef.current, 'hi')
     dispatch(actUpdateProduct(idUpdateRef.current, values))
     setModalVisible(false);
     form.resetFields();
@@ -38,20 +38,24 @@ const ProductForm = () => {
   return (
     <>
       <Col span={6}>
-      <Button type="primary" onClick={() => {setModalVisible(true)
-                                             setEditing(false)}}>Thêm sản phẩm</Button>
+        <Button type="primary" onClick={() => {
+          setModalVisible(true)
+          setEditing(false)
+        }}>Thêm sản phẩm</Button>
       </Col>
       <Modal
-        title={isEditing ? 'Thay đổi thông tin sản phẩm':'Thêm sản phẩm'}
+        title={isEditing ? 'Thay đổi thông tin sản phẩm' : 'Thêm sản phẩm'}
         visible={modalVisible}
-        onCancel={() => {setModalVisible(false);
-                        setEditing(false)}}
+        onCancel={() => {
+          setModalVisible(false);
+          setEditing(false)
+        }}
         footer={null}
       >
         <Form
           layout="vertical"
           form={form}
-          onFinish={isEditing ? handleSaveForm: handleSubmitForm }
+          onFinish={isEditing ? handleSaveForm : handleSubmitForm}
         >
           <Form.Item
             label="Mã Hàng"
@@ -67,16 +71,30 @@ const ProductForm = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item name="productDes"
+            label="Mô tả sản phẩm"
+            rules={[{ required: true, message: 'Vui lòng nhập mô tả sản phẩm!' }]}>
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item name="discount"
+            label="Chiết khấu"
+            rules={[{ required: true, message: 'Vui lòng nhập chiết khấu!' }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="rating"
+            label="Đánh giá"
+            rules={[{ required: true, message: 'Vui lòng tỷ lệ đánh giá!' }]}>
+          <InputNumber />
+          </Form.Item>
           <Form.Item
             label="Loại Ngành Hàng"
             name="productType"
             rules={[{ required: true, message: 'Vui lòng chọn loại ngành hàng!' }]}
           >
             <Select>
-              <Option value="Apple">Apple</Option>
-              <Option value="SamSung">SamSung</Option>
-              <Option value="Xiao Mi">Xiao Mi</Option>
-              <Option value="BPhone">BPhone</Option>
+              <Option value="Accessory">Accessory</Option>
+              <Option value="LivingTool">Living Tool</Option>
+              <Option value="Stationary">Stationery</Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -85,6 +103,17 @@ const ProductForm = () => {
             rules={[{ required: true, message: 'Vui lòng nhập số lượng!' }]}
           >
             <InputNumber />
+          </Form.Item>
+          <Form.Item
+            label="Hình ảnh"
+            name="thumbnail"
+            rules={[{ required: true, message: 'Vui lòng nhập link ảnh!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item name="img" label="Ảnh chi tiết"
+          rules={[{ required: true, message: 'Vui lòng nhập link ảnh!' }]}>
+            <Input.TextArea rows={4} />
           </Form.Item>
           <Form.Item
             label="Giá Nhập"
@@ -101,11 +130,11 @@ const ProductForm = () => {
             <InputNumber />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit">{isEditing ? 'Lưu':'Thêm sản phẩm'}</Button>
+            <Button type="primary" htmlType="submit">{isEditing ? 'Lưu' : 'Thêm sản phẩm'}</Button>
           </Form.Item>
         </Form>
       </Modal>
-      <ProductTable onUpdateForm={handleUpdateForm}/>
+      <ProductTable onUpdateForm={handleUpdateForm} />
     </>
   );
 };

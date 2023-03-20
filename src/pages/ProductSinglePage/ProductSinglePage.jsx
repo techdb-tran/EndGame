@@ -228,7 +228,7 @@ const ProductSinglePage = () => {
                   <button type="button" className="buy-now btn mx-3">
                     <span
                       className="btn-text"
-                      onClick={addToWishlistHandler(product)}
+                      onClick={() => addToWishlistHandler(product)}
                     >
                       favorite
                     </span>

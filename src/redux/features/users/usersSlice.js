@@ -85,7 +85,7 @@ export const usersSlice = createSlice({
     });
 
     builder.addCase(actFetchLogin.rejected, (state) => {
-      state.error = {
+      state.errors = {
         error: "Error",
       };
       state.isLoading = false;
