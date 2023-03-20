@@ -60,10 +60,11 @@ const columns = [
 
 const OrderHistory = () => {
   const {allOrders} = useSelector(state => state.orders);
-  const completedOrders = allOrders.filter(order=>order.status ==="Đã hoàn thành")
+  const reversedOrders = allOrders.slice().reverse();
+  const completedOrders = reversedOrders.filter(order=>order.status ==="Đã hoàn thành")
   const [filteredData, setFilteredData] = useState(completedOrders);
   const handleDateChange = (date, dateString) => {
-    const filtered = allOrders.filter(
+    const filtered = completedOrders.filter(
       (item) =>
         moment(item.completedDate).isSameOrAfter(dateString, 'day') &&
         moment(item.completedDate).isSameOrBefore(dateString, 'day')

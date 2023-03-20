@@ -23,4 +23,7 @@ export const updateProductById = async (id, product)=>{
   const {data} = await axios.patch(`${BE_URL}products/${id}`, product);
   return  data;
 }
-// Chức năng edit giống với chức năng thêm mới
+export const searchProduct = async (query)=>{
+  const {data} = await axios.get(`${BE_URL}products/search?q=${query}`);
+  return data;
+}

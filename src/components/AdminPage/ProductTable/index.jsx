@@ -4,7 +4,8 @@ import { Table, Space, Button, Col } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { actDeleteProduct, actFetchAllProduct, actUpdateProduct } from '../../../redux/features/products/productsSlice';
 import SearchManagement from '../SearchManagement';
-
+import { actSearchProduct } from '../../../redux/features/products/productsSlice';
+import { searchProduct } from '../../../apis/productApi';
 const ProductTable = ({ onUpdateForm }) => {
     const dispatch = useDispatch();
     const { allProducts, isLoading } = useSelector(state => state.products);
@@ -33,17 +34,16 @@ const ProductTable = ({ onUpdateForm }) => {
         setPagination(pagination);
     };
     //HAM SEARCH
-    const [searchText, setSearchText] = useState('');
+    const [query, setQuery] = useState('');
 
-    const handleSearch = (value) => {
-        setSearchText(value);
+    const handleSearch = async(value) => {
+       setQuery(value);
+       const results = await searchProduct(value);
+       dispatch(actSearchProduct(results));  
     };
     const filteredProducts = useMemo(() => {
-        return reversedProducts.filter((product) => {
-            return product.productName.toLowerCase().includes(searchText.toLowerCase())
-                || product.productCode.toLowerCase().includes(searchText.toLowerCase());
-        });
-    }, [reversedProducts, searchText]);
+        return reversedProducts;
+    }, [reversedProducts, query]);
 
     const columns = [
         {
@@ -65,6 +65,12 @@ const ProductTable = ({ onUpdateForm }) => {
             title: 'Số lượng',
             dataIndex: 'productQuantity',
             key: 'productQuantity',
+        },
+        {
+            title: 'Hình ảnh',
+            dataIndex: 'thumbnail',
+            key: 'thumbnail',
+            render: (thumbnail) => <img src={thumbnail} alt="" style={{ maxWidth: '50px', maxHeight: '50px' }} />
         },
         {
             title: 'Giá nhập',
@@ -91,7 +97,7 @@ const ProductTable = ({ onUpdateForm }) => {
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Col span={5}><SearchManagement placeholder='Search name or code' onSearch={handleSearch} /></Col>
+                <Col span={5}><SearchManagement value={query} placeholder='Search name or code' onSearch={handleSearch} onChange={(e)=>setQuery(e.target.value)}/></Col>
             </div>
             {isLoading ? (
                 <div>Loading...</div>

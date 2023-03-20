@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct } from "../../../apis/productApi";
+import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct } from "../../../apis/productApi";
 
 
 const initialState = {
@@ -19,6 +19,13 @@ export const actFetchAllProduct = createAsyncThunk(
     return data || [] ;
   }
 );
+export const actSearchProduct = createAsyncThunk(
+  'products/searchProducts',
+  async(query)=>{
+    const data = await searchProduct(query);
+    return data || [];
+  }
+)
 
 export const productsSlice = createSlice({
   name: "product",

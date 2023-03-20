@@ -32,7 +32,7 @@ const LogisticsManagement = () => {
     return <div>Error: {error}</div>;
   }
 
-  const handleConfirm = (id) => { dispatch(actUpdateOrderStatus({ id, status: 'Đã hoàn thành' })) };
+  const handleConfirm = (id) => { dispatch(actUpdateOrderStatus({ id, status: "Đã hoàn thành" })) };
 
   const columns = [
     {

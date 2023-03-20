@@ -85,9 +85,18 @@ const UserForm = () => {
                     <Form.Item
                         label="Số điện thoại"
                         name="phoneNumber"
-                        rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
+                        rules={[
+                            {
+                              required: true,
+                              message: 'Vui lòng nhập số điện thoại!',
+                            },
+                            {
+                              pattern: /^(\+84|84|0)(3[2-9]|5[689]|7[0|6-9]|8[1-9]|9[0-9])([0-9]{7})$/,
+                              message: 'Số điện thoại không đúng định dạng!',
+                            },
+                          ]}
                     >
-                        <InputNumber />
+                        <Input />
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ"
