@@ -367,7 +367,7 @@
     {
       "productCode": "SP27",
       "productName": " [COMBO 3 Chiếc] Bút Bi Viết Vịt Siêu Nhân Siêu Dễ Thương",
-      "productDes": "Màu mực : Đen\n\n \n\nSize ngòi: 0.5mm. Chữ đẹp, Mực trơn, đều. Chất liệu, thiết kế: bút làm bằng nhựa tốt, cứng cáp, bền chắc.  Chất liệu mực chất lượng, đậm nét, đều màu.",
+      "productDes": "Màu mực : Đen\n\n \n\nSize ngòi: 0.5mm. Chữ đẹp, Mực trơn, đều. Chất liệu, thiết kế: bút làm bằng nhựa tốt, cứng cáp, bền chắc. Chất liệu mực chất lượng, đậm nét, đều màu.",
       "discount": "5%",
       "rating": 4.9,
       "productType": "Stationary",
@@ -421,6 +421,8 @@
       "id": 30
     }
   ],
+  "comments": {},
+  "ratings": {},
   "users": [
     {
       "email": "penthutam@gmail.com",
@@ -440,6 +442,32 @@
       "phoneNumber": "0354927368",
       "address": "400 Bà Triệu",
       "id": 6
+    },
+    {
+      "email": "penthutu@gmail.com",
+      "password": "$2a$10$apwaVlVPYjwDBV8XwEZwGOwUIzWewCvuTrTti51xAdXdEOCJpHowm",
+      "username": "hello Kitty",
+      "gender": "Nam",
+      "phoneNumber": 1278999,
+      "address": "690 HBT",
+      "id": 3
+    },
+    {
+      "email": "kiddanbonggg@gmail.com",
+      "password": "$2a$10$qyBe464Ya9WUZUAGTDdunuhXJRe68MZj4zWvHZAULk3UKOVpGrzrO",
+      "username": "pen thứ tư",
+      "gender": "Nam",
+      "phoneNumber": 3039839389,
+      "address": "730 HBT",
+      "id": 4
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$rd85MtR8Fk5032MDEEnGkOORHMGjxi31weKcbUe6ZW9eayXAhFhmC",
+      "id": 5,
+      "image": "https://www.w3schools.com/howto/img_avatar.png",
+      "isAdmin": false,
+      "userName": "sang"
     }
   ],
   "orders": [

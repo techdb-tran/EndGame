@@ -144,12 +144,14 @@ const CartPage = () => {
                 </span>
               </div>
 
-              <button
-                type="button"
-                className="checkout-btn text-white bg-orange fs-16"
-              >
-                Check Out
-              </button>
+              <Link to="/checkout">
+                <button
+                  type="button"
+                  className="checkout-btn text-white bg-orange fs-16"
+                >
+                  Check Out
+                </button>
+              </Link>
             </div>
           </div>
         </div>

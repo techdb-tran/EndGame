@@ -15,6 +15,11 @@ export const fetchRegisterUser = async (user) => {
     return res.data
 }
 
+export const fetchUserBytId = async (id) => {
+    const res = await axios.get(`${BE_URL}users/${id}`);
+    return res.data
+}
+
 export const fetchAllUserData = async () => {
     const { data } = await axios.get(`${BE_URL}users`);// gọi api và lấy tất cả data user
     return data;

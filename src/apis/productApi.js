@@ -8,6 +8,7 @@ export const fetchSearchProduct = async (searchTerm) => {
   const res = await axios.get(`${BE_URL}products/search?q={searchTerm}`)
   return res.data
 }
+
 export const fetchDataProductById = async (id) =>{
   const {data} = await axios.get(`${BE_URL}products/${id}`);// gọi api và lấy tt sp theo id
   return data;
