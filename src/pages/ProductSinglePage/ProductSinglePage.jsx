@@ -5,10 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAsyncProductSingle,
   getProductSingle,
-  getSingleProductStatus,
 } from "../../redux/features/productSlice/productSlice";
-import { STATUS } from "../../constants/status";
-import Loader from "../../components/Loader/Loader";
 import { formatPrice } from "../../constants/formatPrice";
 import {
   addToCart,
@@ -18,14 +15,21 @@ import {
 } from "../../redux/features/cartSlice/cartSlice";
 import CartMessage from "../../components/CartMessage/CartMessage";
 import { addToWishlist } from "../../redux/features/wishlistSlice/wishlistSlice";
+// import {
+//   addComment,
+//   addRating,
+// } from "../../redux/features/products/productsSlice";
 
 const ProductSinglePage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(getProductSingle);
-  const productSingleStatus = useSelector(getSingleProductStatus);
   const [quantity, setQuantity] = useState(1);
   const cartMessageStatus = useSelector(getCartMessageStatus);
+  // const ratings = useSelector((state) => state.product.ratings);
+  // const comments = useSelector((state) => state.product.comments);
+  // const [rating, setRating] = useState(null);
+  // const [comment, setComment] = useState("");
 
   // getting single product
   useEffect(() => {
@@ -40,9 +44,6 @@ const ProductSinglePage = () => {
 
   let discountedPrice =
     product?.price - product?.price * (product?.discountPercentage / 100);
-  if (productSingleStatus === STATUS.LOADING) {
-    return <Loader />;
-  }
 
   const increaseQty = () => {
     setQuantity((prevQty) => {
@@ -74,6 +75,22 @@ const ProductSinglePage = () => {
   const addToWishlistHandler = (product) => {
     dispatch(addToWishlist({ ...product }));
   };
+
+  // const handleRatingChange = (event) => {
+  //   setRating(parseInt(event.target.value));
+  // };
+
+  // const handleCommentChange = (event) => {
+  //   setComment(event.target.value);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   dispatch(addRating({ productId: product.id, rating }));
+  //   dispatch(addComment({ productId: product.id, comment }));
+  //   setRating(null);
+  //   setComment("");
+  // };
 
   return (
     <main className="py-5 bg-whitesmoke">
@@ -223,9 +240,6 @@ const ProductSinglePage = () => {
                     </span>
                   </button>
                   <button type="button" className="buy-now btn mx-3">
-                    <span className="btn-text">buy now</span>
-                  </button>
-                  <button type="button" className="buy-now btn mx-3">
                     <span
                       className="btn-text"
                       onClick={() => addToWishlistHandler(product)}
@@ -238,6 +252,22 @@ const ProductSinglePage = () => {
             </div>
           </div>
         </div>
+        {/* <div>
+          <select value={rating} onChange={handleRatingChange}>
+            <option value="">Select rating</option>
+            <option value="1">1 star</option>
+            <option value="2">2 stars</option>
+            <option value="3">3 stars</option>
+            <option value="4">4 stars</option>
+            <option value="5">5 stars</option>
+          </select>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+        <div>
+          {ratings[product.id] && <div>{ratings[product.id]} stars</div>}
+          {comments[product.id] &&
+            comments[product.id].map((c, i) => <div key={i}>{c}</div>)}
+        </div> */}
       </div>
 
       {cartMessageStatus && <CartMessage />}

@@ -7,9 +7,10 @@ import {
   fetchUpdateUserById,
   fetchLoginUser,
   fetchRegisterUser,
+  fetchUserBytId
 } from "../../../apis/userApi";
 import { KEY_ACCESS_TOKEN, KEY_IS_LOGGED } from "../../../constants/config";
-// import * as Jwt from "jsonwebtoken";
+import * as Jwt from "jsonwebtoken";
 
 const initialState = {
   allUsers: [],
@@ -42,6 +43,11 @@ export const actFetchRegister = createAsyncThunk(
     return userData;
   }
 );
+
+export const actFetchUserByID = createAsyncThunk('users/actFetchUserByID', async (id) => {
+  const user = await fetchUserBytId(id)
+  return user
+})
 
 export const usersSlice = createSlice({
   name: "user",
@@ -113,33 +119,33 @@ export const usersSlice = createSlice({
   },
 });
 
-// export const actReLogin = (accessToken) => async (dispatch) => {
-//   try {
-//     const decodeToken = Jwt.decode(accessToken);
-//     if (decodeToken?.email) {
-//       const repsInfo = await fetchInfoMe(decodeToken.email);
-//       const infoUser = repsInfo?.[0];
-//       delete infoUser?.password;
-//       dispatch(actGetMe(infoUser));
-//       dispatch(loginSuccess());
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   } finally {
-//     dispatch(actUpdateLoadingCreate(false));
-//   }
-// };
+export const actReLogin = (accessToken) => async (dispatch) => {
+  try {
+    const decodeToken = Jwt.decode(accessToken);
+    if (decodeToken?.email) {
+      const repsInfo = await fetchInfoMe(decodeToken.email);
+      const infoUser = repsInfo?.[0];
+      delete infoUser?.password;
+      dispatch(actGetMe(infoUser));
+      dispatch(loginSuccess());
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(actUpdateLoadingCreate(false));
+  }
+};
 
-// export const actRegister = (user) => async (dispatch) => {
-//   try {
-//     dispatch(actUpdateLoadingCreate(true));
-//     await fetchRegisterUser(user);
-//   } catch (error) {
-//     console.log(error);
-//   } finally {
-//     dispatch(actUpdateLoadingCreate(false));
-//   }
-// };
+export const actRegister = (user) => async (dispatch) => {
+  try {
+    dispatch(actUpdateLoadingCreate(true));
+    await fetchRegisterUser(user);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(actUpdateLoadingCreate(false));
+  }
+};
 
 // Create middleware call create user
 export const actCreateUser = (user) => async (dispatch) => {

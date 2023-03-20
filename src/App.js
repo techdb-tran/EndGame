@@ -15,37 +15,26 @@ import Layout from "./layouts/UserLayout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import WishlistPage from "./pages/WishlistPage/WishlistPage";
-import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Footer from "./components/Footer/Footer";
+import AccountPage from "./pages/AccountPage/AccountPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Header />
-        <Sidebar /> */}
-        {/* <Route> */}
-        {/* <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/product/:id" element={<ProductSingle />} />
-            <Route path="/category/:category" element={<CategoryProduct />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/search/:searchTerm" element={<Search />} />
-          </Route> */}
-        {/* <Route> */}
         <Routes>
           <Route path="/" element={<Layout />} >
             <Route index element={<Home />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="/account/profile" element={<ProfilePage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/product/:id" element={<ProductSingle />} />
             <Route path="/category/:category" element={<CategoryProduct />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/search/:searchTerm" element={<Search />} />
           </Route>
           <Route>
@@ -60,7 +49,6 @@ function App() {
             </Route>
           </Route>
         </Routes>
-        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );

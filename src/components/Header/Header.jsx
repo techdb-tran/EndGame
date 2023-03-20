@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [toggle, setToggle] = useState(false);
+  const { isLogged, user } = useSelector((state) => state.users);
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
+  const styleActive = ({ isActive }) => {
+    return {
+      color: isActive ? "#B99B6B" : "#000",
+    };
+  };
+
   return (
     <header className="header text-white">
       <div className="container">
@@ -37,9 +50,28 @@ const Header = () => {
                 </li>
                 <li className="vert-line"></li>
                 <li>
-                  <Link to="/login">
+                  {/* <Link to="/login">
                     <span className="top-link-itm-txt">Log in</span>
-                  </Link>
+                  </Link> */}
+                  {isLogged ? (
+                    <li>
+                      <NavLink to={"/account"}>
+                        <span className="header-avatar">
+                          <img src={user?.image} alt="" />
+                        </span>
+                      </NavLink>
+                    </li>
+                  ) : (
+                    <li>
+                      <NavLink
+                        style={styleActive}
+                        onClick={() => setToggle(false)}
+                        to={"/login"}
+                      >
+                        <span>LOGIN</span>
+                      </NavLink>
+                    </li>
+                  )}
                 </li>
               </ul>
             </div>

@@ -1,0 +1,145 @@
+.profile {
+  margin-bottom: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  gap: 30px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .profile__top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      &--img {
+        width: 110px;
+        height: 110px;
+        background-color: #eee;
+        border-radius: 50%;
+
+        img {
+          width: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .profile__top--action {
+        display: flex;
+        gap: 5px;
+
+        input {
+          padding: 5px 10px;
+          outline: none;
+          border: 1px solid #eee;
+          border-radius: 4px;
+        }
+
+        button {
+          padding: 5px 10px;
+          border: none;
+          cursor: pointer;
+          background-color: #b99b6b;
+          font-weight: bold;
+          color: #fff;
+          border-radius: 4px;
+        }
+      }
+    }
+
+    .profile__bottom {
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .form-input {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-size: 12px;
+          font-weight: bold;
+        }
+
+        input {
+          padding: 5px 10px;
+          border: 1px solid #eee;
+          border-radius: 5px;
+          outline: none;
+        }
+      }
+
+      button {
+        padding: 5px 10px;
+        border: none;
+        font-weight: bold;
+        color: #fff;
+        background-color: #2977d0;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+@media (max-width: 440px) {
+  .profile {
+    form {
+      .profile__top {
+        &--img {
+          width: 80px;
+          height: 80px;
+
+          img {
+          }
+        }
+
+        .profile__top--action {
+          input {
+          }
+
+          button {
+          }
+        }
+      }
+
+      .profile__bottom {
+        width: 90%;
+        margin-top: 20px;
+
+        .form-input {
+          display: flex;
+          flex-direction: column;
+
+          label {
+            font-size: 12px;
+            font-weight: bold;
+          }
+
+          input {
+            padding: 5px 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            outline: none;
+          }
+        }
+
+        button {
+          padding: 5px 10px;
+          border: none;
+          font-weight: bold;
+          color: #fff;
+          background-color: #b99b6b;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
