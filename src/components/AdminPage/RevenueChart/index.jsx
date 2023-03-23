@@ -1,39 +1,52 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Tabs } from 'antd';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { actFetchAllOrder } from '../../../redux/features/orderSlice/orderSlice';
 const { TabPane } = Tabs;
 
-const quarterlyData = [
-{ name: 'Quarter 2/2022', revenue: 3700 },
-{ name: 'Quarter 3/2022', revenue: 3800},
-{ name: 'Quarter 4/2022', revenue: 5100},
-{ name: 'Quarter 1/2023', revenue: 6100}, ];
-const monthlyData = [  
-{ month: 'Mar/2022', revenue: 1000 },
-{ month: 'Apr/2022', revenue: 1200 },
-{ month: 'May/2022', revenue: 1500 },
-{ month: 'Jun/2022', revenue: 1300 },
-{ month: 'Jul/2022', revenue: 1100 },
-{ month: 'Aug/2022', revenue: 1400 },
-{ month: 'Sep/2022', revenue: 1600 },
-{ month: 'Oct/2022', revenue: 1800 },
-{ month: 'Nov/2022', revenue: 1700 },
-{ month: 'Dec/2022', revenue: 1900 },
-{ month: 'Jan/2023', revenue: 2000 },
-{ month: 'Feb/2023', revenue: 2200 },];
-const weeklyData = [
-{ week: 'Week 1/Feb', revenue: 300 },
-{ week: 'Week 2/Feb', revenue: 400 },
-{ week: 'Week 3/Feb', revenue: 500 },
-{ week: 'Week 4/Feb', revenue: 450 },];
-
 const RevenueChart = () => {
+  const dispatch = useDispatch();
+  const {allOrders} = useSelector(state=>state.orders)
+  useEffect(()=>{
+    dispatch(actFetchAllOrder())
+  },[dispatch]);
+  
+  const completedOrder = allOrders.slice().filter(order=>order.status === 'Đã hoàn thành')
+  const result = Object.values(completedOrder.reduce((acc,{completedDate, salesPrice})=>{
+    const month = completedDate.split('-')[1];
+    acc[month] = (acc[month]||0)+Number(salesPrice)
+    return acc;
+  },{}))
+  console.log(result)
+
   const [activeTab, setActiveTab] = useState('quaterly');
   const handleTabChange = (key) => {
     setActiveTab(key);
   }
-
+  const quarterlyData = [
+    { name: 'Quarter 2/2022', revenue: Number(result[3]+result[4]+result[5]) },
+    { name: 'Quarter 3/2022', revenue: Number(result[6]+result[7]+result[8])},
+    { name: 'Quarter 4/2022', revenue: Number(result[9]+result[10]+result[11])},
+    { name: 'Quarter 1/2023', revenue: Number(result[0]+result[1]+result[2])}, ];
+    const monthlyData = [  
+    { month: 'Apr/2022', revenue: result[3] },
+    { month: 'May/2022', revenue: result[4] },
+    { month: 'Jun/2022', revenue: result[5] },
+    { month: 'Jul/2022', revenue: result[6] },
+    { month: 'Aug/2022', revenue: result[7] },
+    { month: 'Sep/2022', revenue: result[8] },
+    { month: 'Oct/2022', revenue: result[9] },
+    { month: 'Nov/2022', revenue: result[10] },
+    { month: 'Dec/2022', revenue: result[11] },
+    { month: 'Jan/2023', revenue: result[0] },
+    { month: 'Feb/2023', revenue: result[1]},
+    { month: 'Mar/2023', revenue: result[2]}];
+    const weeklyData = [
+    { week: 'Week 1/Feb', revenue: 2000000 },
+    { week: 'Week 2/Feb', revenue: 900000 },
+    { week: 'Week 3/Feb', revenue: 6000000 },
+    { week: 'Week 4/Feb', revenue: 9000000},];
   const renderChart = () => {
     switch (activeTab) {
       case 'quaterly':

@@ -7,13 +7,15 @@ import {
   fetchUpdateUserById,
   fetchLoginUser,
   fetchRegisterUser,
-  fetchUserBytId
+  fetchUserBytId,
+  searchUser
 } from "../../../apis/userApi";
 import { KEY_ACCESS_TOKEN, KEY_IS_LOGGED } from "../../../constants/config";
 import * as Jwt from "jsonwebtoken";
 
 const initialState = {
   allUsers: [],
+  userSearch:[],
   isLoading: false,
   isLoadingCreate: false,
   isLoadingDelete: false,
@@ -43,7 +45,13 @@ export const actFetchRegister = createAsyncThunk(
     return userData;
   }
 );
-
+export const actSearchUsers = createAsyncThunk(
+  'users/searchProducts',
+  async(query)=>{
+    const data = await searchUser(query);
+    return data;
+  }
+)
 export const actFetchUserByID = createAsyncThunk('users/actFetchUserByID', async (id) => {
   const user = await fetchUserBytId(id)
   return user
@@ -116,6 +124,10 @@ export const usersSlice = createSlice({
       };
       state.isLoading = false;
     });
+    builder.addCase(actSearchUsers.fulfilled,(state, action)=>{
+      state.isLoading =false;
+      state.userSearch = action.payload || [];
+    })
   },
 });
 

@@ -39,3 +39,8 @@ export const fetchUpdateUserById = async (id, user) => {
     const {data}= await axios.patch(`${BE_URL}users/${id}`, user);
     return data;
 }
+//Search user
+export const searchUser = async(query)=>{
+    const {data} = await axios.get(`${BE_URL}users?q=${query}`)
+    return data;
+}

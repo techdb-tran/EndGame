@@ -5,6 +5,7 @@ import { BE_URL } from "../../../constants/config";
 
 const initialState = {
   allProducts: [],
+  productSearch: [],
   ratings: {},
   comments: {},
   // product: {},
@@ -42,7 +43,7 @@ export const actSearchProduct = createAsyncThunk(
   'products/searchProducts',
   async(query)=>{
     const data = await searchProduct(query);
-    return data || [];
+    return data;
   }
 )
 
@@ -86,6 +87,10 @@ export const productsSlice = createSlice({
       state.isLoading = false;
       state.allProducts = action.payload || [];
     });
+    builder.addCase(actSearchProduct.fulfilled, (state, action) =>{
+      state.isLoading =false;
+      state.productSearch = action.payload || [];
+    })
   },
 });
 export const actCreateProduct = (product) => async (dispatch) => {
