@@ -11,9 +11,11 @@ import {
 } from "../../redux/features/productSlice/productSlice";
 import Loader from "../../components/Loader/Loader";
 import { STATUS } from "../../constants/status";
+import useScrollToTop from "../../hooks/useScrollToTop"
 // import { actFetchAllProduct } from "../../redux/features/products/productsSlice";
 
 const HomePage = () => {
+  useScrollToTop()
   const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
 
