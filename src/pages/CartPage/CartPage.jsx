@@ -68,7 +68,7 @@ const CartPage = () => {
                     <span className="cart-ctxt">{idx + 1}</span>
                   </div>
                   <div className="cart-ctd">
-                    <span className="cart-ctxt">{cart?.title}</span>
+                    <span className="cart-ctxt">{cart?.productName}</span>
                   </div>
                   <div className="cart-ctd">
                     <span className="cart-ctxt">

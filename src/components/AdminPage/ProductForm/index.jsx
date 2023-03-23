@@ -79,7 +79,7 @@ const ProductForm = () => {
           <Form.Item name="discount"
             label="Chiết khấu"
             rules={[{ required: true, message: 'Vui lòng nhập chiết khấu!' }]}>
-            <Input />
+            <InputNumber/>
           </Form.Item>
           <Form.Item name="rating"
             label="Đánh giá"

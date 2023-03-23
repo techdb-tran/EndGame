@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductSinglePage.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAsyncProductSingle,
@@ -15,6 +15,7 @@ import {
 } from "../../redux/features/cartSlice/cartSlice";
 import CartMessage from "../../components/CartMessage/CartMessage";
 import { addToWishlist } from "../../redux/features/wishlistSlice/wishlistSlice";
+import { actFetchAllProduct, actProductById } from "../../redux/features/products/productsSlice";
 // import {
 //   addComment,
 //   addRating,
@@ -22,20 +23,18 @@ import { addToWishlist } from "../../redux/features/wishlistSlice/wishlistSlice"
 
 const ProductSinglePage = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
-  const { isLogged } = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const product = useSelector(getProductSingle);
+  const {product} = useSelector(state=> state.products);
   const [quantity, setQuantity] = useState(1);
   const cartMessageStatus = useSelector(getCartMessageStatus);
   // const ratings = useSelector((state) => state.product.ratings);
   // const comments = useSelector((state) => state.product.comments);
   // const [rating, setRating] = useState(null);
   // const [comment, setComment] = useState("");
-
+ console.log(product)
   // getting single product
   useEffect(() => {
-    dispatch(fetchAsyncProductSingle(id));
+    dispatch(actProductById(id));
 
     if (cartMessageStatus) {
       setTimeout(() => {
@@ -45,7 +44,7 @@ const ProductSinglePage = () => {
   }, [cartMessageStatus]);
 
   let discountedPrice =
-    product?.price - product?.price * (product?.discountPercentage / 100);
+  product?.productSalePrice - product?.productSalePrice * (product?.discount / 100);
 
   const increaseQty = () => {
     setQuantity((prevQty) => {
@@ -65,7 +64,7 @@ const ProductSinglePage = () => {
 
   const addToCartHandler = (product) => {
     let discountedPrice =
-      product?.price - product?.price * (product?.discountPercentage / 100);
+      product?.productSalePrice - product?.productSalePrice * (product?.discount / 100);
     let totalPrice = quantity * discountedPrice;
 
     dispatch(
@@ -77,10 +76,6 @@ const ProductSinglePage = () => {
   const addToWishlistHandler = (product) => {
     dispatch(addToWishlist({ ...product }));
   };
-
-  const handleLoginPage = () => {
-    navigate('/login')
-  }
 
   // const handleRatingChange = (event) => {
   //   setRating(parseInt(event.target.value));
@@ -108,7 +103,7 @@ const ProductSinglePage = () => {
                 <div className="product-img-zoom">
                   <img
                     src={
-                      product ? (product.images ? product.images[0] : "") : ""
+                      product ? product.thumbnail : ""
                     }
                     alt=""
                     className="img-cover"
@@ -158,9 +153,9 @@ const ProductSinglePage = () => {
 
             <div className="product-single-r">
               <div className="product-details font-manrope">
-                <div className="title fs-20 fw-5">{product?.title}</div>
+                <div className="title fs-20 fw-5">{product?.productName}</div>
                 <div>
-                  <p className="para fw-3 fs-15">{product?.description}</p>
+                  <p className="para fw-3 fs-15">{product?.productDes}</p>
                 </div>
                 <div className="info flex align-center flex-wrap fs-14">
                   <div className="rating">
@@ -169,15 +164,10 @@ const ProductSinglePage = () => {
                   </div>
                   <div className="vert-line"></div>
                   <div className="brand">
-                    <span className="text-orange fw-5">Brand:</span>
-                    <span className="mx-1">{product?.brand}</span>
-                  </div>
-                  <div className="vert-line"></div>
-                  <div className="brand">
                     <span className="text-orange fw-5">Category:</span>
                     <span className="mx-1 text-capitalize">
-                      {product?.category
-                        ? product.category.replace("-", " ")
+                      {product?.productType
+                        ? product.productType.replace("-", " ")
                         : ""}
                     </span>
                   </div>
@@ -186,7 +176,7 @@ const ProductSinglePage = () => {
                 <div className="price">
                   <div className="flex align-center">
                     <div className="old-price text-gray">
-                      {formatPrice(product?.price)}
+                      {formatPrice(product?.productSalePrice)}
                     </div>
                     <span className="fs-14 mx-2 text-dark">
                       Inclusive of all taxes
@@ -233,51 +223,27 @@ const ProductSinglePage = () => {
                   )}
                 </div>
 
-                {isLogged ? (
-                  <div className="btns">
-                    <button type="button" className="add-to-cart-btn btn">
-                      <i className="fas fa-shopping-cart"></i>
-                      <span
-                        className="btn-text mx-2"
-                        onClick={() => {
-                          addToCartHandler(product);
-                        }}
-                      >
-                        add to cart
-                      </span>
-                    </button>
-                    <button type="button" className="buy-now btn mx-3">
-                      <span
-                        className="btn-text"
-                        onClick={() => addToWishlistHandler(product)}
-                      >
-                        add to wishlist
-                      </span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="btns">
-                    <button type="button" className="add-to-cart-btn btn">
-                      <i className="fas fa-shopping-cart"></i>
-                      <span
-                        className="btn-text mx-2"
-                        onClick={() => {
-                          handleLoginPage();
-                        }}
-                      >
-                        add to cart
-                      </span>
-                    </button>
-                    <button type="button" className="buy-now btn mx-3">
-                      <span
-                        className="btn-text"
-                        onClick={() => handleLoginPage()}
-                      >
-                        add to wishlist
-                      </span>
-                    </button>
-                  </div>
-                )}
+                <div className="btns">
+                  <button type="button" className="add-to-cart-btn btn">
+                    <i className="fas fa-shopping-cart"></i>
+                    <span
+                      className="btn-text mx-2"
+                      onClick={() => {
+                        addToCartHandler(product);
+                      }}
+                    >
+                      add to cart
+                    </span>
+                  </button>
+                  <button type="button" className="buy-now btn mx-3">
+                    <span
+                      className="btn-text"
+                      onClick={() => addToWishlistHandler(product)}
+                    >
+                      favorite
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

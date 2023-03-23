@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct} from "../../../apis/productApi";
+import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct, fetchDataProductById} from "../../../apis/productApi";
 import axios from "axios";
 import { BE_URL } from "../../../constants/config";
 
@@ -7,7 +7,7 @@ const initialState = {
   allProducts: [],
   ratings: {},
   comments: {},
-  // product: {},
+  product:{},
   isLoading: false,
   isLoadingCreate: false,
   isLoadingDelete: false,
@@ -42,6 +42,13 @@ export const actSearchProduct = createAsyncThunk(
   'products/searchProducts',
   async(query)=>{
     const data = await searchProduct(query);
+    return data || [];
+  }
+)
+export const actProductById = createAsyncThunk(
+  'products/fetchDataProductById',
+  async(id)=>{
+    const data = await fetchDataProductById(id);
     return data || [];
   }
 )
@@ -86,6 +93,10 @@ export const productsSlice = createSlice({
       state.isLoading = false;
       state.allProducts = action.payload || [];
     });
+    builder.addCase(actProductById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.product = action.payload || [];
+    });
   },
 });
 export const actCreateProduct = (product) => async (dispatch) => {
@@ -123,5 +134,6 @@ export const actUpdateProduct = (id, product) => async (dispatch) => {
 };
 export const { actUpdateLoadingCreate, addRating, addComment } =
   productsSlice.actions;
+
 
 export default productsSlice.reducer;

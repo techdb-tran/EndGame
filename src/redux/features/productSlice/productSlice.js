@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../../constants/config";
+import { BASE_URL, BE_URL } from "../../../constants/config";
 import { STATUS } from "../../../constants/status";
 
 const initialState = {
@@ -55,7 +55,7 @@ export const fetchAsyncProducts = createAsyncThunk(
 export const fetchAsyncProductSingle = createAsyncThunk(
   "product-single/fetch",
   async (id) => {
-    const response = await fetch(`${BASE_URL}products/${id}`);
+    const response = await fetch(`${BE_URL}products/${id}`);
     const data = await response.json();
     return data;
   }
