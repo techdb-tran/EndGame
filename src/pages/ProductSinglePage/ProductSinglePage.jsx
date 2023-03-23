@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductSinglePage.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAsyncProductSingle,
@@ -22,6 +22,8 @@ import { addToWishlist } from "../../redux/features/wishlistSlice/wishlistSlice"
 
 const ProductSinglePage = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
+  const { isLogged } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const product = useSelector(getProductSingle);
   const [quantity, setQuantity] = useState(1);
@@ -75,6 +77,10 @@ const ProductSinglePage = () => {
   const addToWishlistHandler = (product) => {
     dispatch(addToWishlist({ ...product }));
   };
+
+  const handleLoginPage = () => {
+    navigate('/login')
+  }
 
   // const handleRatingChange = (event) => {
   //   setRating(parseInt(event.target.value));
@@ -227,27 +233,51 @@ const ProductSinglePage = () => {
                   )}
                 </div>
 
-                <div className="btns">
-                  <button type="button" className="add-to-cart-btn btn">
-                    <i className="fas fa-shopping-cart"></i>
-                    <span
-                      className="btn-text mx-2"
-                      onClick={() => {
-                        addToCartHandler(product);
-                      }}
-                    >
-                      add to cart
-                    </span>
-                  </button>
-                  <button type="button" className="buy-now btn mx-3">
-                    <span
-                      className="btn-text"
-                      onClick={() => addToWishlistHandler(product)}
-                    >
-                      favorite
-                    </span>
-                  </button>
-                </div>
+                {isLogged ? (
+                  <div className="btns">
+                    <button type="button" className="add-to-cart-btn btn">
+                      <i className="fas fa-shopping-cart"></i>
+                      <span
+                        className="btn-text mx-2"
+                        onClick={() => {
+                          addToCartHandler(product);
+                        }}
+                      >
+                        add to cart
+                      </span>
+                    </button>
+                    <button type="button" className="buy-now btn mx-3">
+                      <span
+                        className="btn-text"
+                        onClick={() => addToWishlistHandler(product)}
+                      >
+                        add to wishlist
+                      </span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="btns">
+                    <button type="button" className="add-to-cart-btn btn">
+                      <i className="fas fa-shopping-cart"></i>
+                      <span
+                        className="btn-text mx-2"
+                        onClick={() => {
+                          handleLoginPage();
+                        }}
+                      >
+                        add to cart
+                      </span>
+                    </button>
+                    <button type="button" className="buy-now btn mx-3">
+                      <span
+                        className="btn-text"
+                        onClick={() => handleLoginPage()}
+                      >
+                        add to wishlist
+                      </span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,18 +1,21 @@
 import axios from "axios"
 import {BE_URL} from "../constants/config"
-export const fetchAllDataProduct = async ()=>{
-  const {data} = await axios.get(`${BE_URL}products`);// gọi api và lấy tất cả data
+
+export const fetchAllDataProduct = async () => {
+  const {data} = await axios.get(`${BE_URL}products`);
   return data;
-}
-export const fetchSearchProduct = async (searchTerm) => {
-  const res = await axios.get(`${BE_URL}products/search?q={searchTerm}`)
-  return res.data
-}
+};
 
 export const fetchDataProductById = async (id) =>{
   const {data} = await axios.get(`${BE_URL}products/${id}`);// gọi api và lấy tt sp theo id
   return data;
 }
+
+export const fetchSearchProduct = async (searchTerm) => {
+  const response = await axios.get(`${BE_URL}products?q={searchTerm}`)
+  return response.data
+}
+
 export const deleteProductById = async (id) =>{
   return await axios.delete(`${BE_URL}products/${id}`); // gọi api xóa sp theo id
 }

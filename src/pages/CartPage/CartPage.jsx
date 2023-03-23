@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CartPage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { shopping_cart } from "../../constants/images";
@@ -15,6 +15,7 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const carts = useSelector(getAllCarts);
   const { itemsCount, totalAmount } = useSelector((state) => state.cart);
+  const { isLogged } = useSelector((state) => state.users);
 
   if (carts.length === 0) {
     return (
@@ -152,6 +153,39 @@ const CartPage = () => {
                   Check Out
                 </button>
               </Link>
+              {/* {isLogged ? (
+                <Link to="/checkout">
+                  <button
+                    type="button"
+                    className="checkout-btn text-white bg-orange fs-16"
+                  >
+                    Check Out
+                  </button>
+                </Link>
+              ) : (
+                <div>
+                  <h3>You must login before checkout</h3>
+                  <Link
+                    to="/login"
+                    style={{ display: "flex", justifyContent: "flex-end" }}
+                  >
+                    <button
+                      type="button"
+                      className="checkout-btn text-white bg-orange fs-16"
+                    >
+                      Login
+                    </button>
+                  </Link>
+                </div>
+              )} */}
+              {/* <Link to="/checkout">
+                <button
+                  type="button"
+                  className="checkout-btn text-white bg-orange fs-16"
+                >
+                  Check Out
+                </button>
+              </Link> */}
             </div>
           </div>
         </div>
