@@ -21,7 +21,7 @@ const CartModal = ({ carts }) => {
                   <img src={cart?.thumbnail} alt="" className="img-cover" />
                 </div>
                 <div className="cart-modal-item-title fs-13 font-manrope text-capitalize">
-                  {cart?.title}
+                  {cart?.productName}
                 </div>
                 <div className="cart-modal-item-price text-orange fs-14 fw-6">
                   {formatPrice(cart?.discountedPrice)}
