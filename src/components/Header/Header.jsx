@@ -8,14 +8,6 @@ const Header = () => {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const { isLogged, user } = useSelector((state) => state.users);
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
-  const styleActive = ({ isActive }) => {
-    return {
-      color: isActive ? "#B99B6B" : "#000",
-    };
-  };
 
   return (
     <header className="header text-white">
@@ -50,9 +42,6 @@ const Header = () => {
                 </li>
                 <li className="vert-line"></li>
                 <li>
-                  {/* <Link to="/login">
-                    <span className="top-link-itm-txt">Log in</span>
-                  </Link> */}
                   {isLogged ? (
                     <li>
                       <NavLink to={"/account"}>
@@ -64,7 +53,6 @@ const Header = () => {
                   ) : (
                     <li>
                       <NavLink
-                        style={styleActive}
                         onClick={() => setToggle(false)}
                         to={"/login"}
                       >

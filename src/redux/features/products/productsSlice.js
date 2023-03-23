@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct } from "../../../apis/productApi";
+import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct} from "../../../apis/productApi";
 import axios from "axios";
 import { BE_URL } from "../../../constants/config";
 

@@ -14,9 +14,12 @@ import * as Jwt from "jsonwebtoken";
 
 const initialState = {
   allUsers: [],
+  user: {},
+  // accessToken: localStorage.getItem(KEY_ACCESS_TOKEN) || "",
   isLoading: false,
   isLoadingCreate: false,
   isLoadingDelete: false,
+  // isLogged: JSON.parse(localStorage.getItem(KEY_IS_LOGGED)) || false,
   errors: {},
 };
 //Create middleware handle call API
@@ -116,6 +119,10 @@ export const usersSlice = createSlice({
       };
       state.isLoading = false;
     });
+    builder.addCase(actFetchUserByID.fulfilled,  (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload || {}
+  })
   },
 });
 

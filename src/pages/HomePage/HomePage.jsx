@@ -11,6 +11,7 @@ import {
 } from "../../redux/features/productSlice/productSlice";
 import Loader from "../../components/Loader/Loader";
 import { STATUS } from "../../constants/status";
+// import { actFetchAllProduct } from "../../redux/features/products/productsSlice";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,16 @@ const HomePage = () => {
   const products = useSelector(getAllProducts);
   const productStatus = useSelector(getAllProductsStatus);
 
+  // const {products, isLoading} = useSelector((state) => state.products)
+
+  // console.log(products);
+  // useEffect(() => {
+  //   dispatch(actFetchAllProduct())
+  // },[])
+
   // randomizing the products in the list
   const tempProducts = [];
-  if(products.length > 0){
+  if(products?.length > 0){
     for(let i in products){
       let randomIndex = Math.floor(Math.random() * products.length);
 
@@ -54,6 +62,7 @@ const HomePage = () => {
                 <h3>See our products</h3>
               </div>
               { productStatus === STATUS.LOADING ? <Loader /> : <ProductList products = {tempProducts} />}
+              {/* <ProductList products = {tempProducts} /> */}
             </div>
 
             <div className='categories-item'>

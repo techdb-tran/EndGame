@@ -13,6 +13,14 @@ const ProductList = ({ products }) => {
           <Product key={product.id} product={{ ...product, discountedPrice }} />
         );
       })}
+      {/* {Object.keys(products).map((product) => {
+        let discountedPrice =
+          product.price - product.price * (product.discountPercentage / 100);
+
+        return (
+          <Product key={product.id} product={{ ...product, discountedPrice }} />
+        );
+      })} */}
     </div>
   );
 };
