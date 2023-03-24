@@ -7,19 +7,18 @@ import {
   fetchUpdateUserById,
   fetchLoginUser,
   fetchRegisterUser,
-  fetchUserBytId
+  fetchUserBytId,
+  searchUser
 } from "../../../apis/userApi";
 import { KEY_ACCESS_TOKEN, KEY_IS_LOGGED } from "../../../constants/config";
 import * as Jwt from "jsonwebtoken";
 
 const initialState = {
   allUsers: [],
-  user: {},
-  // accessToken: localStorage.getItem(KEY_ACCESS_TOKEN) || "",
+  userSearch:[],
   isLoading: false,
   isLoadingCreate: false,
   isLoadingDelete: false,
-  // isLogged: JSON.parse(localStorage.getItem(KEY_IS_LOGGED)) || false,
   errors: {},
 };
 //Create middleware handle call API
@@ -46,7 +45,13 @@ export const actFetchRegister = createAsyncThunk(
     return userData;
   }
 );
-
+export const actSearchUsers = createAsyncThunk(
+  'users/searchProducts',
+  async(query)=>{
+    const data = await searchUser(query);
+    return data;
+  }
+)
 export const actFetchUserByID = createAsyncThunk('users/actFetchUserByID', async (id) => {
   const user = await fetchUserBytId(id)
   return user
@@ -119,10 +124,10 @@ export const usersSlice = createSlice({
       };
       state.isLoading = false;
     });
-    builder.addCase(actFetchUserByID.fulfilled,  (state, action) => {
-      state.isLoading = false;
-      state.user = action.payload || {}
-  })
+    builder.addCase(actSearchUsers.fulfilled,(state, action)=>{
+      state.isLoading =false;
+      state.userSearch = action.payload || [];
+    })
   },
 });
 

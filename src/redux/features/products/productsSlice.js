@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct, fetchDataProductById} from "../../../apis/productApi";
+import { deleteProductById, updateProductById, fetchAllDataProduct, fetchCreateProduct, searchProduct, fetchDataProductById, searchProductType} from "../../../apis/productApi";
 import axios from "axios";
 import { BE_URL } from "../../../constants/config";
 
 const initialState = {
   allProducts: [],
+  productSearch: [],
+  productTypeSearch:[],
   ratings: {},
   comments: {},
   product:{},
@@ -42,7 +44,14 @@ export const actSearchProduct = createAsyncThunk(
   'products/searchProducts',
   async(query)=>{
     const data = await searchProduct(query);
-    return data || [];
+    return data;
+  }
+)
+export const actSearchProductType = createAsyncThunk(
+  'products/searchProductType',
+  async(productType)=>{
+    const data = await searchProductType(productType);
+    return data;
   }
 )
 export const actProductById = createAsyncThunk(
@@ -93,9 +102,17 @@ export const productsSlice = createSlice({
       state.isLoading = false;
       state.allProducts = action.payload || [];
     });
+    builder.addCase(actSearchProduct.fulfilled, (state, action) =>{
+      state.isLoading =false;
+      state.productSearch = action.payload || [];
+    })
     builder.addCase(actProductById.fulfilled, (state, action) => {
       state.isLoading = false;
       state.product = action.payload || [];
+    });
+    builder.addCase(actSearchProductType.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.productTypeSearch = action.payload || [];
     });
   },
 });

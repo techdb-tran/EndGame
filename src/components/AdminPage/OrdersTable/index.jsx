@@ -35,38 +35,38 @@ const OrdersTable = () => {
 
   const columns = [
     {
-      title: 'Order ID',
+      title: 'Mã đơn hàng',
       dataIndex: 'orderCode',
       key: 'orderCode',
     },
     {
-      title: 'Product Name',
+      title: 'Tên đơn hàng',
       dataIndex: 'productName',
       key: 'productName',
     },
     {
-      title: 'Type',
+      title: 'Loại sản phẩm',
       dataIndex: 'type',
       key: 'type',
     },
     {
-      title: 'Image',
+      title: 'Hình ảnh',
       dataIndex: 'img',
       key: 'img',
       render: (img) => <img src={img} alt="" style={{ maxWidth: '50px', maxHeight: '50px' }} />,
     },
     {
-      title: 'Quantity',
+      title: 'Số lượng',
       dataIndex: 'quantity',
       key: 'quantity',
     },
     {
-      title: 'Total',
+      title: 'Tổng tiền hàng',
       dataIndex: 'salesPrice',
       key: 'salesPrice',
     },
     {
-      title: 'Status',
+      title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
       render: (status) => {

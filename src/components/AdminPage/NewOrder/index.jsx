@@ -22,7 +22,7 @@ const NewOrder = () => {
                                     <ShoppingCartOutlined style={{ color: '#722ed1', fontSize: '32px' }} />
                                 </div>
                             }
-                            style={{ fontSize: '20px', fontWeight: 'bold', color: '#f00' }}
+                            style={{ fontSize: '15px', fontWeight: 'bold', color: '#f00' }}
                         />
                     </Card>
         </div>
