@@ -3,6 +3,7 @@ import { Card } from 'antd'
 import { ArrowUpOutlined, MoneyCollectOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { actFetchAllOrder } from '../../../redux/features/orderSlice/orderSlice'
+import { formatPrice } from '../../../constants/formatPrice'
 const Revenue = () => {
     const dispatch = useDispatch();
     const {allOrders} = useSelector(state=>state.orders)
@@ -18,19 +19,20 @@ const Revenue = () => {
         }
         return total;
     }
+    const vndRevenue = formatPrice(allRevenue())
     return (
         <>
             <Card style={{width:'260px'}}>
                 <Card.Meta
                     title="Revenue"
-                    description={allRevenue()}
+                    description={vndRevenue}
                     avatar={
                         <div>
                             <ArrowUpOutlined style={{ color: '#52c41a', fontSize: '48px' }} />
                             <MoneyCollectOutlined style={{ color: '#52c41a', fontSize: '32px' }} />
                         </div>
                     }
-                    style={{ fontSize: '20px', fontWeight: 'bold', color: '#f00' }}
+                    style={{ fontSize: '14px', fontWeight: 'bold', color: '#f00' }}
                 />
             </Card>
         </>

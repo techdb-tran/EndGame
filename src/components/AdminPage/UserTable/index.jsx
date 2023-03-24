@@ -1,24 +1,25 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Space, Button, Col } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { actDeleteUser, actFetchAllUsers, actUpdateUser } from '../../../redux/features/users/usersSlice';
+import { Table, Space, Button, Col, Modal } from 'antd';
+import { EditOutlined, DeleteOutlined,ExclamationCircleOutlined } from '@ant-design/icons';
+import { actDeleteUser, actFetchAllUsers, actSearchUsers, actUpdateUser } from '../../../redux/features/users/usersSlice';
 import SearchManagement from '../SearchManagement';
 const UserTable = ({onUpdateUser}) => {
-    const { allUsers, isLoading } = useSelector(state => state.users);
+    const [query, setQuery] = useState('');
+    const { allUsers, userSearch, isLoading } = useSelector(state => state.users);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(actFetchAllUsers());
     }, [dispatch]);
-
+    useEffect(()=>{
+        dispatch(actSearchUsers(query))
+    },[dispatch,query])
     const reversedUser = useMemo(()=>{
         return allUsers.slice().reverse()
     },[allUsers])
-
-
-    const handleDeleteUser = (id) => {
-        dispatch(actDeleteUser(id));
-    };
+    const reversedSearchUser = useMemo(()=>{
+        return userSearch.slice().reverse()
+    },[userSearch])
 
     const handleEditUser = (id) => {
         const user = allUsers.find(item => item.id===id);
@@ -42,19 +43,38 @@ const UserTable = ({onUpdateUser}) => {
         }
         return { ...user, power };
     });
+    const userSearchData = reversedSearchUser.map((user) => {
+        let power = "Customer";
+        if (user.isAdmin) {
+            power = "Admin";
+        }
+        return { ...user, power };
+    });
         //HAM SEARCH
-        const [searchText, setSearchText] = useState('');
-
         const handleSearch = (value) => {
-            setSearchText(value);
+            setQuery(value);
         };
-        const filteredUsers = useMemo(() => {
-            return userData.filter((user) => {
-                return user.email.toLowerCase().includes(searchText.toLowerCase())
-                    || user.username.toLowerCase().includes(searchText.toLowerCase());
-            });
-        }, [userData, searchText]);
-    
+        const filteredUsers =()=>{
+            if(query){
+                return userSearchData;
+            }
+            else{
+                return userData;
+            }
+        }
+        const [isModalVisible, setIsModalVisible] = useState(false);
+
+        const handleDeleteUser = (id) => {
+            Modal.confirm({
+                title: 'Bạn có chắc chắn muốn xóa người dùng này?',
+                icon: <ExclamationCircleOutlined />,
+                okText: 'Xóa',
+                cancelText: 'Hủy bỏ',
+                onOk: () => {
+                  dispatch(actDeleteUser(id));
+                },
+              });
+        };
     const columns = [
         {
             title: 'Họ và Tên',
@@ -72,7 +92,7 @@ const UserTable = ({onUpdateUser}) => {
         //     key: 'password',
         // },
         {
-            title: 'Gioi tinh',
+            title: 'Giới tính',
             dataIndex: 'gender',
             key: 'gender',
         },
@@ -106,12 +126,12 @@ const UserTable = ({onUpdateUser}) => {
     return (
         <div>
             <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-            <Col span={5}><SearchManagement placeholder="search username or email" onSearch={handleSearch}/></Col>
+            <Col span={5}><SearchManagement placeholder="search user..." onSearch={handleSearch}/></Col>
             </div>
             {isLoading ? (
                 <div>Loading...</div>
             ) : (
-                <Table columns={columns} dataSource={filteredUsers} rowKey="id" pagination={pagination}
+                <Table columns={columns} dataSource={filteredUsers()} rowKey="id" pagination={pagination}
                     onChange={handleTableChange} />
             )}
         </div>

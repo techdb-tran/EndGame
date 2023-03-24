@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./CategoryProductPage.scss";
 import ProductList from "../../components/ProductList/ProductList";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,28 +16,55 @@ const CategoryProductPage = () => {
   const { category } = useParams();
   const categoryProducts = useSelector(getAllProductsByCategory);
   const categoryProductsStatus = useSelector(getCategoryProductsStatus);
+  const { allProducts } = useSelector((state) => state.products);
+  const [filterType, setFilterType] = useState(allProducts);
 
   useEffect(() => {
     dispatch(fetchAsyncProductsOfCategory(category));
   }, [dispatch, category]);
-
+  function handleClick(type) {
+    switch (type) {
+      case "accessory":
+        setFilterType(
+          allProducts.filter((item) => item.productType === "Accessory")
+        );
+        break;
+      case "livingTool":
+        setFilterType(
+          allProducts.filter((item) => item.productType === "LivingTool")
+        );
+        break;
+      case "stationary":
+        setFilterType(
+          allProducts.filter((item) => item.productType === "Stationary")
+        );
+        break;
+      default:
+        setFilterType(allProducts);
+        break;
+    }
+  }
+  console.log(filterType)
   return (
     <div className="cat-products py-5 bg-whitesmoke">
       <div className="container">
         <div className="cat-products-content">
           <div className="title-md">
             <h3>
-              See our{" "}
+              See our {" "}
               <span className="text-capitalize">
                 {category.replace("-", " ")}
               </span>
             </h3>
+            <button onClick={() => handleClick("accessory")}>Accessories</button>
+            <button onClick={() => handleClick("livingTool")}>Living Tools</button>
+            <button onClick={() => handleClick("stationary")}>Stationaries</button>
           </div>
 
           {categoryProductsStatus === STATUS.LOADING ? (
             <Loader />
           ) : (
-            <ProductList products={categoryProducts} />
+            <ProductList products={filterType} />
           )}
         </div>
       </div>

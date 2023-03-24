@@ -1,98 +1,89 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./RegisterPage.scss";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { registerFormSchema } from "../../constants/formRegisterSchema";
-import { useDispatch } from "react-redux";
-import { actFetchRegister } from "../../redux/features/users/usersSlice";
-const initialFormValue = {
-  userName: "",
-  email: "",
-  password: "",
-  isAdmin: false,
-  image: "",
-  address: "",
-  phoneNumber: "",
-};
+import React from 'react';
+import { Form, Input, Button, Select, InputNumber, Col } from 'antd';
+import { useDispatch } from 'react-redux';
+import { actCreateUser, actUpdateUser } from '../../redux/features/users/usersSlice';
+import { useNavigate } from 'react-router-dom';
+
+const { Option } = Select;
+
 const RegisterPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [form] = Form.useForm();
+    const navigate = useNavigate()
 
-  const handleLoginPage = () => {
-    navigate("/login");
-  };
-
-  //Validate
-  const methods = useForm({
-    defaultValues: initialFormValue,
-    resolver: yupResolver(registerFormSchema),
-  });
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-
-  const onRegister = (values) => {
-    dispatch(actFetchRegister(values));
-  };
-  return (
-    <div>
-      <div className="register-page">
-        <div className="register-container">
-          <div className="register__form">
-            <div className="register__form--heading">
-              <h3>Register</h3>
-            </div>
-            <form onSubmit={handleSubmit(onRegister)}>
-              {!!errors.email && (
-                <span style={{ color: "red", textAlign: "left" }}>
-                  {errors.email.message}
-                </span>
-              )}
-              <Controller
-                name="email"
-                control={control}
-                render={({ field: { value, onChange } }) => (
-                  <input
-                    value={value}
-                    onChange={onChange}
-                    type="email"
-                    placeholder="Email"
-                  />
-                )}
-              />
-
-              {!!errors.password && (
-                <span style={{ color: "red", textAlign: "left" }}>
-                  {errors.password.message}
-                </span>
-              )}
-              <Controller
-                name="password"
-                control={control}
-                render={({ field: { value, onChange } }) => (
-                  <input
-                    value={value}
-                    onChange={onChange}
-                    type="password"
-                    placeholder="Password"
-                  />
-                )}
-              />
-              <span onClick={handleLoginPage}>I already have an account. Login here.</span>
-              <div className="register__btn">
-                <button className="register__btn--signin" type="submit">
-                  Sign Up
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    const handleSubmitForm = (values) => {
+        dispatch(actCreateUser(values));
+        form.resetFields();
+        navigate('/login')
+    };
+    return (
+        <>
+                <Form
+                    layout="vertical"
+                    form={form}
+                    onFinish={handleSubmitForm}
+                >
+                    <Form.Item
+                        label="Tài khoản"
+                        name="username"
+                        rules={[{ required: true, message: 'Vui lòng nhập tài khoản!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[{ required: true, message: 'Vui lòng nhập email!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Mật khẩu"
+                        name="password"
+                        rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <Form.Item
+                        label="Giới tính"
+                        name="gender"
+                        rules={[{ required: true, message: 'Vui lòng chọn giới tính!' }]}
+                    >
+                        <Select>
+                            <Option value="Nam">Nam</Option>
+                            <Option value="Nữ">Nữ</Option>
+                            <Option value="Khác">Khác</Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        label="Số điện thoại"
+                        name="phoneNumber"
+                        rules={[
+                            {
+                              required: true,
+                              message: 'Vui lòng nhập số điện thoại!',
+                            },
+                            {
+                              pattern: /^(\+84|84|0)(3[2-9]|5[689]|7[0|6-9]|8[1-9]|9[0-9])([0-9]{7})$/,
+                              message: 'Số điện thoại không đúng định dạng!',
+                            },
+                          ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Địa chỉ"
+                        name="address"
+                        rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">Sign in</Button>
+                    </Form.Item>
+                </Form>
+        </>
+    );
 };
 
 export default RegisterPage;

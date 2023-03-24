@@ -14,12 +14,21 @@ import {
 const Sidebar = () => {
   const dispatch = useDispatch();
   const isSidebarOn = useSelector(getSidebarStatus);
-  const categories = useSelector(getAllCategories);
-
+  const {allProducts} = useSelector(state => state.products)
+  const category = allProducts.reduce((acc, item) => {
+    if (!acc.includes(item.productType)) {
+      acc.push(item.productType);
+    }
+    return acc;
+  }, []);
+  const categories = []
+  category.forEach((item, index) => {
+    categories[index] = item;
+  });
   useEffect(() => {
     dispatch(fetchAsyncCategories());
   }, [dispatch]);
-
+  console.log(categories)
   return (
     <aside className={`sidebar ${isSidebarOn ? "hide-sidebar" : ""}`}>
       <button
@@ -34,14 +43,14 @@ const Sidebar = () => {
           All Categories
         </div>
         <ul className="cat-list">
-          {categories.map((category, idx) => {
+          {categories.map((category, index) => {
             return (
-              <li key={idx} onClick={() => dispatch(setSidebarOff())}>
+              <li key={index} onClick={() => dispatch(setSidebarOff())}>
                 <Link
                   to={`category/${category}`}
                   className="cat-list-link text-capitalize"
                 >
-                  {category.replace("-", " ")}
+                  {category}
                 </Link>
               </li>
             );

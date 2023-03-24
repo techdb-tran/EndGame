@@ -4,15 +4,17 @@ import Product from "../Product/Product";
 import { useSelector, useDispatch } from "react-redux";
 import { actFetchAllProduct } from "../../redux/features/products/productsSlice";
 
-const ProductList = () => {
+const ProductList = ({products}) => {
   const {allProducts} = useSelector(state => state.products)
   const dispatch = useDispatch();
   useEffect(()=>{
     dispatch(actFetchAllProduct())
   },[])
+  console.log(products,'hi')
   return (
+    <>
     <div className="product-lists grid bg-whitesmoke my-3">
-      {allProducts.map((product) => {
+      {products.map((product) => {
         let discountedPrice =
           product.productSalePrice - product.productSalePrice * (product.discount/100);
         return (
@@ -28,6 +30,7 @@ const ProductList = () => {
         );
       })} */}
     </div>
+    </>
   );
 };
 

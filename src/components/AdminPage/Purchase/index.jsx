@@ -4,6 +4,7 @@ import { ArrowUpOutlined, StockOutlined } from '@ant-design/icons'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actFetchAllProduct } from '../../../redux/features/products/productsSlice'
+import { formatPrice } from '../../../constants/formatPrice'
 const Purchase = () => {
     const dispatch = useDispatch();
     const {allProducts} = useSelector(state=>state.products)
@@ -19,19 +20,20 @@ const Purchase = () => {
         }
         return total;
     }
+    const vndPurchase = formatPrice(allPurchase())
     return (
         <>
             <Card>
                 <Card.Meta
                     title="Purchase"
-                    description={allPurchase()}
+                    description={vndPurchase}
                     avatar={
                         <div>
                             <ArrowUpOutlined style={{ color: '#52c41a', fontSize: '48px' }} />
                             <StockOutlined style={{ color: '#faad14', fontSize: '32px' }} />
                         </div>
                     }
-                    style={{ fontSize: '15px', fontWeight: 'bold', color: '#f00' }}
+                    style={{ fontSize: '13px', fontWeight: 'bold', color: '#f00' }}
                 />
             </Card>
         </>

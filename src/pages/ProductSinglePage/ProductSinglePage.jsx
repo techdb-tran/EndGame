@@ -24,14 +24,13 @@ import { actFetchAllProduct, actProductById } from "../../redux/features/product
 const ProductSinglePage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const {product} = useSelector(state=> state.products);
+  const { product } = useSelector(state => state.products);
   const [quantity, setQuantity] = useState(1);
   const cartMessageStatus = useSelector(getCartMessageStatus);
   // const ratings = useSelector((state) => state.product.ratings);
   // const comments = useSelector((state) => state.product.comments);
   // const [rating, setRating] = useState(null);
   // const [comment, setComment] = useState("");
- console.log(product)
   // getting single product
   useEffect(() => {
     dispatch(actProductById(id));
@@ -41,10 +40,10 @@ const ProductSinglePage = () => {
         dispatch(setCartMessageOff());
       }, 2000);
     }
-  }, [cartMessageStatus]);
+  }, [cartMessageStatus, dispatch]);
 
   let discountedPrice =
-  product?.productSalePrice - product?.productSalePrice * (product?.discount / 100);
+    product?.productSalePrice - product?.productSalePrice * (product?.discount / 100);
 
   const increaseQty = () => {
     setQuantity((prevQty) => {
@@ -53,7 +52,6 @@ const ProductSinglePage = () => {
       return tempQty;
     });
   };
-
   const decreaseQty = () => {
     setQuantity((prevQty) => {
       let tempQty = prevQty - 1;
@@ -76,24 +74,12 @@ const ProductSinglePage = () => {
   const addToWishlistHandler = (product) => {
     dispatch(addToWishlist({ ...product }));
   };
-
-  // const handleRatingChange = (event) => {
-  //   setRating(parseInt(event.target.value));
-  // };
-
-  // const handleCommentChange = (event) => {
-  //   setComment(event.target.value);
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   dispatch(addRating({ productId: product.id, rating }));
-  //   dispatch(addComment({ productId: product.id, comment }));
-  //   setRating(null);
-  //   setComment("");
-  // };
-
+  const proImg = product.img;
+  console.log(proImg)
+  let imgLink = (product.img).split("\\n")
+  console.log(imgLink)
   return (
+
     <main className="py-5 bg-whitesmoke">
       <div className="product-single">
         <div className="container">
@@ -103,7 +89,7 @@ const ProductSinglePage = () => {
                 <div className="product-img-zoom">
                   <img
                     src={
-                      product ? product.thumbnail : ""
+                      product.thumbnail
                     }
                     alt=""
                     className="img-cover"
@@ -113,36 +99,28 @@ const ProductSinglePage = () => {
                 <div className="product-img-thumbs flex align-center my-2">
                   <div className="thumb-item">
                     <img
-                      src={
-                        product ? (product.images ? product.images[1] : "") : ""
-                      }
+                      src={imgLink[0]}
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={
-                        product ? (product.images ? product.images[2] : "") : ""
-                      }
+                      src={imgLink[1]}
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={
-                        product ? (product.images ? product.images[3] : "") : ""
-                      }
+                      src={imgLink[2]}
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={
-                        product ? (product.images ? product.images[4] : "") : ""
-                      }
+                      src={imgLink[3]}
                       alt=""
                       className="img-cover"
                     />
