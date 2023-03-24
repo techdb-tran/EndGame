@@ -477,7 +477,17 @@
       "gender": "Nam",
       "phoneNumber": "0356541782",
       "address": "Đà Nẵng",
-      "id": 8
+      "id": 8,
+      "image": "https://www.w3schools.com/howto/img_avatar.png",
+      "isAdmin": false
+    },
+    {
+      "email": "admin1@gmail.com",
+      "password": "$2a$10$IRg6NC8ytcgrbMuxdyE/ueyEKFSws9eX7jTz6skurRmif5Xf85T3a",
+      "id": 7,
+      "image": "https://www.w3schools.com/howto/img_avatar.png",
+      "isAdmin": true,
+      "userName": "Truong Sang"
     }
   ],
   "orders": [

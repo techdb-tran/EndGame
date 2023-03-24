@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductSinglePage.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAsyncProductSingle,
@@ -15,7 +15,10 @@ import {
 } from "../../redux/features/cartSlice/cartSlice";
 import CartMessage from "../../components/CartMessage/CartMessage";
 import { addToWishlist } from "../../redux/features/wishlistSlice/wishlistSlice";
-import { actFetchAllProduct, actProductById } from "../../redux/features/products/productsSlice";
+import {
+  actFetchAllProduct,
+  actProductById,
+} from "../../redux/features/products/productsSlice";
 // import {
 //   addComment,
 //   addRating,
@@ -23,6 +26,8 @@ import { actFetchAllProduct, actProductById } from "../../redux/features/product
 
 const ProductSinglePage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { isLogged } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const { product } = useSelector(state => state.products);
   const [quantity, setQuantity] = useState(1);
@@ -31,6 +36,7 @@ const ProductSinglePage = () => {
   // const comments = useSelector((state) => state.product.comments);
   // const [rating, setRating] = useState(null);
   // const [comment, setComment] = useState("");
+  console.log(product);
   // getting single product
   useEffect(() => {
     dispatch(actProductById(id));
@@ -62,7 +68,8 @@ const ProductSinglePage = () => {
 
   const addToCartHandler = (product) => {
     let discountedPrice =
-      product?.productSalePrice - product?.productSalePrice * (product?.discount / 100);
+      product?.productSalePrice -
+      product?.productSalePrice * (product?.discount / 100);
     let totalPrice = quantity * discountedPrice;
 
     dispatch(
@@ -78,6 +85,27 @@ const ProductSinglePage = () => {
   console.log(proImg)
   let imgLink = (product.img).split("\\n")
   console.log(imgLink)
+
+  const handleLoginPage = () => {
+    navigate("/login");
+  };
+
+  // const handleRatingChange = (event) => {
+  //   setRating(parseInt(event.target.value));
+  // };
+
+  // const handleCommentChange = (event) => {
+  //   setComment(event.target.value);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   dispatch(addRating({ productId: product.id, rating }));
+  //   dispatch(addComment({ productId: product.id, comment }));
+  //   setRating(null);
+  //   setComment("");
+  // };
+
   return (
 
     <main className="py-5 bg-whitesmoke">
@@ -201,27 +229,54 @@ const ProductSinglePage = () => {
                   )}
                 </div>
 
-                <div className="btns">
-                  <button type="button" className="add-to-cart-btn btn">
-                    <i className="fas fa-shopping-cart"></i>
-                    <span
-                      className="btn-text mx-2"
-                      onClick={() => {
-                        addToCartHandler(product);
-                      }}
-                    >
-                      add to cart
-                    </span>
-                  </button>
-                  <button type="button" className="buy-now btn mx-3">
-                    <span
-                      className="btn-text"
-                      onClick={() => addToWishlistHandler(product)}
-                    >
-                      favorite
-                    </span>
-                  </button>
-                </div>
+                {isLogged ? (
+                  <div className="btns">
+                    <button type="button" className="add-to-cart-btn btn">
+                      <i className="fas fa-shopping-cart"></i>
+                      <span
+                        className="btn-text mx-2"
+                        onClick={() => {
+                          addToCartHandler(product);
+                        }}
+                      >
+                        add to cart
+                      </span>
+                    </button>
+                    <button type="button" className="buy-now btn mx-3">
+                      <span className="fs-15">
+                        <i class="fas fa-heart"></i>
+                      </span>
+                      <span
+                        className="btn-text mx-2"
+                        onClick={() => addToWishlistHandler(product)}
+                      >
+                        add to wishlist
+                      </span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="btns">
+                    <button type="button" className="add-to-cart-btn btn">
+                      <i className="fas fa-shopping-cart"></i>
+                      <span
+                        className="btn-text mx-2"
+                        onClick={() => {
+                          handleLoginPage();
+                        }}
+                      >
+                        add to cart
+                      </span>
+                    </button>
+                    <button type="button" className="buy-now btn mx-3">
+                      <span
+                        className="btn-text"
+                        onClick={() => handleLoginPage()}
+                      >
+                        add to wishlist
+                      </span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
