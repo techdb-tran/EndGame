@@ -7,7 +7,7 @@ const ProductWishlist = () => {
     const wishlistItems = useSelector((state) => state.wishlist.items);
 
     return (
-      <div>
+      <div className="wishlist-container">
         {wishlistItems.length === 0 && <div>Your wishlist is empty.</div>}
         {wishlistItems.map((item) => (
           <WishlistItem key={item.id} item={item} />

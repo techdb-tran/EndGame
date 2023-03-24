@@ -37,7 +37,10 @@ const Header = () => {
               <ul className="top-links flex align-center">
                 <li>
                   <Link to="/wishlist">
-                    <span className="top-link-itm-txt">Wishlist</span>
+                    <span className="fs-15">
+                      <i class="fas fa-heart"></i>
+                    </span>
+                    <span className="top-link-itm-txt mx-1">Wishlist</span>
                   </Link>
                 </li>
                 <li className="vert-line"></li>
@@ -52,10 +55,7 @@ const Header = () => {
                     </li>
                   ) : (
                     <li>
-                      <NavLink
-                        onClick={() => setToggle(false)}
-                        to={"/login"}
-                      >
+                      <NavLink onClick={() => setToggle(false)} to={"/login"}>
                         <span>LOGIN</span>
                       </NavLink>
                     </li>

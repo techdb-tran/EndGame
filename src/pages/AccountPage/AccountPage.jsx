@@ -34,11 +34,21 @@ const AccountPage = () => {
 
   return (
     <div className="account">
-      <div className="account__img">
-        <img src={user.image} alt="" />
+      <div
+        style={{
+          display: "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+        }}
+      >
+        <div className="account__img">
+          <img src={user.image} alt="" />
+        </div>
+        <div className="account__detail">
+          <h3>{user.userName}</h3>
+        </div>
       </div>
       <div className="account__detail">
-        <h3>{user.username}</h3>
         <div className="account__detail--action">
           <div className="account-act">
             <button className="act-account" onClick={() => handleToggle()}>
