@@ -415,7 +415,7 @@
       "productType": "Stationary",
       "productQuantity": 10,
       "thumbnail": "https://salt.tikicdn.com/cache/750x750/ts/product/f7/6e/90/a7ac9f67ae0ea146bf2079c535a5b4ed.jpg.webp",
-      "img": "https://salt.tikicdn.com/cache/750x750/ts/product/4a/dd/08/6d12a992409d8b526d2f704c2e012004.jpg.webp\\nhttps://salt.tikicdn.com/cache/750x750/ts/product/9a/69/0f/4484c1df34a5169e59d7d4cefef8c0b6.jpg.webp\\nhttps://salt.tikicdn.com/cache/750x750/ts/product/51/a4/4a/d550442f59679a2c9d0db6a3de30b76e.jpg.webp\\nhttps://salt.tikicdn.com/cache/750x750/ts/review/95/4d/4d/b1e587727682300edd0e4390f270146c.jpg.webp",
+      "img": "https://salt.tikicdn.com/cache/750x750/ts/review/95/4d/4d/b1e587727682300edd0e4390f270146c.jpg.webp",
       "productImportPrice": 85000,
       "productSalePrice": 170000,
       "id": 30
@@ -424,6 +424,16 @@
   "comments": {},
   "ratings": {},
   "users": [
+    {
+      "email": "truongsang@gmail.com",
+      "password": "$2a$10$Bmbwmb8WMzqCeyDQh/iwneUgAri7Lt0.BR2Vc75HRjSX6JXSUzF2G",
+      "username": "truong sang",
+      "gender": "Nam",
+      "phoneNumber": "0354927537",
+      "address": "Đà Nẵng",
+      "isAdmin": true,
+      "id": 1
+    },
     {
       "email": "penthutam@gmail.com",
       "password": "$2a$10$cub//pw0LVfTobHMTjEiM.acP2c4/Rn7BbGdO2/tQI/H7SZkIXO0i",
@@ -463,7 +473,7 @@
     },
     {
       "email": "admin@gmail.com",
-      "password": "$2a$10$T9beW/m8twUv2SmBbkzqmeF39L/O3G5G8ZRbPjSjXgPfNxj158F3K",
+      "password": "$2a$10$diJWO6LtWV5IXkMnXtHDZOmOsRxF9Iu3WmBiGExxfTkicDtEniV22",
       "username": "admin1",
       "gender": "Nam",
       "phoneNumber": "0354927513",
@@ -478,16 +488,16 @@
       "phoneNumber": "0356541782",
       "address": "Đà Nẵng",
       "id": 8,
-      "image": "https://www.w3schools.com/howto/img_avatar.png",
       "isAdmin": false
     },
     {
-      "email": "admin1@gmail.com",
-      "password": "$2a$10$IRg6NC8ytcgrbMuxdyE/ueyEKFSws9eX7jTz6skurRmif5Xf85T3a",
-      "id": 7,
-      "image": "https://www.w3schools.com/howto/img_avatar.png",
-      "isAdmin": true,
-      "userName": "Truong Sang"
+      "email": "penthuhai@gmail.com",
+      "password": "$2a$10$I9glwOGwHt9epBhNcegyguCnJFwXzLWDQYY/c/wk62BJGs3/K6vBq",
+      "username": "Penthuhai",
+      "gender": "Nam",
+      "phoneNumber": "0356879356",
+      "address": "Hoi An",
+      "id": 9
     }
   ],
   "orders": [
@@ -899,7 +909,7 @@
       "productName": "Dao sinh tồn",
       "customerName": "Lê Minh Huy",
       "customerAddress": "20 Lê Văn Sỹ, Quận 3, Tp. Hồ Chí Minh",
-      "completedDate": "2023-03-11",
+      "completedDate": "2023-03-25",
       "type": "Living Tool",
       "quantity": "10",
       "salesPrice": "900000",
@@ -912,7 +922,7 @@
       "productName": "Bếp sinh tồn",
       "customerName": "Nguyễn Hoàng Huy",
       "customerAddress": "Xóm Chiếu, Ấp 2, Long Xuyên, An Giang",
-      "completedDate": "2023-03-11",
+      "completedDate": "2023-03-25",
       "type": "Living Tool",
       "quantity": "4",
       "salesPrice": "900000",
@@ -925,7 +935,7 @@
       "productName": "Ly sinh tồn",
       "customerName": "Lương Thị Quỳnh",
       "customerAddress": "Xóm 2, Ấp 1, Đồng Xoài, Bình Phước",
-      "completedDate": "2023-03-11",
+      "completedDate": "2023-03-25",
       "type": "Living Tool",
       "quantity": "2",
       "salesPrice": "180000",
@@ -938,7 +948,7 @@
       "productName": "Kéo cắt giấy",
       "customerName": "Nguyễn Văn Anh",
       "customerAddress": "101 Lê Hữu Trác, Quận Thanh Khê, Đà Nẵng",
-      "completedDate": "2023-03-11",
+      "completedDate": "2023-03-25",
       "type": "Stationery",
       "quantity": "10",
       "salesPrice": "850000",
@@ -951,7 +961,7 @@
       "productName": "Bình giữ nhiệt",
       "customerName": "Trần Thị Bích Ngọc",
       "customerAddress": "127 Cầu Đất, Thủ Đức, Tp. Hồ Chí Minh",
-      "completedDate": "2023-03-11",
+      "completedDate": "2023-03-25",
       "type": "Stationery",
       "quantity": "3",
       "salesPrice": "450000",
@@ -964,7 +974,7 @@
       "productName": "Kính thiên văn",
       "customerName": "Lê Thị Tuyết Mai",
       "customerAddress": "98 Hùng Vương, Quận Hải Châu, Đà Nẵng",
-      "completedDate": "2023-03-11",
+      "completedDate": "2023-03-25",
       "type": "Stationery",
       "quantity": "1",
       "salesPrice": "1200000",

@@ -65,15 +65,15 @@ const UserTable = ({onUpdateUser}) => {
         const [isModalVisible, setIsModalVisible] = useState(false);
 
         const handleDeleteUser = (id) => {
-            Modal.confirm({
-                title: 'Bạn có chắc chắn muốn xóa người dùng này?',
-                icon: <ExclamationCircleOutlined />,
-                okText: 'Xóa',
-                cancelText: 'Hủy bỏ',
-                onOk: () => {
-                  dispatch(actDeleteUser(id));
-                },
-              });
+                Modal.confirm({
+                    title: 'Bạn có chắc chắn muốn xóa người dùng này?',
+                    icon: <ExclamationCircleOutlined />,
+                    okText: 'Xóa',
+                    cancelText: 'Hủy bỏ',
+                    onOk: () => {
+                      dispatch(actDeleteUser(id));
+                    },
+                  });
         };
     const columns = [
         {

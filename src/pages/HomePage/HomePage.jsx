@@ -2,27 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.scss";
 import Slider from "../../components/Slider/SliderTop";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCategories } from "../../redux/features/categorySlice/categorySlice";
 import ProductList from "../../components/ProductList/ProductList";
-import {
-  fetchAsyncProducts,
-  getAllProducts,
-  getAllProductsStatus,
-} from "../../redux/features/productSlice/productSlice";
-import Loader from "../../components/Loader/Loader";
-import { STATUS } from "../../constants/status";
 import useScrollToTop from "../../hooks/useScrollToTop"
 import { actFetchAllProduct } from "../../redux/features/products/productsSlice";
-// import { actFetchAllProduct } from "../../redux/features/products/productsSlice";
+
 
 const HomePage = () => {
   useScrollToTop()
   const dispatch = useDispatch();
-  //const categories = useSelector(getAllCategories);
 
   useEffect(() => {
     dispatch(actFetchAllProduct());
-  }, []);
+  },[]);
 
   const {allProducts} = useSelector(state=>state.products);
   const[isClick, setIsClick] = useState(false)

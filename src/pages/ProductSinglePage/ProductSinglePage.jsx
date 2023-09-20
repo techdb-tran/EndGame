@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./ProductSinglePage.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchAsyncProductSingle,
-  getProductSingle,
-} from "../../redux/features/productSlice/productSlice";
 import { formatPrice } from "../../constants/formatPrice";
 import {
   addToCart,
@@ -16,7 +12,6 @@ import {
 import CartMessage from "../../components/CartMessage/CartMessage";
 import { addToWishlist } from "../../redux/features/wishlistSlice/wishlistSlice";
 import {
-  actFetchAllProduct,
   actProductById,
 } from "../../redux/features/products/productsSlice";
 // import {
@@ -81,10 +76,8 @@ const ProductSinglePage = () => {
   const addToWishlistHandler = (product) => {
     dispatch(addToWishlist({ ...product }));
   };
-  const proImg = product.img;
-  console.log(proImg)
-  let imgLink = (product.img).split("\\n")
-  console.log(imgLink)
+  
+  console.log(product.img)
 
   const handleLoginPage = () => {
     navigate("/login");
@@ -105,7 +98,8 @@ const ProductSinglePage = () => {
   //   setRating(null);
   //   setComment("");
   // };
-
+  const imgLink = (product.img).split("\\n");
+  console.log((product.img).split("\\n"));
   return (
 
     <main className="py-5 bg-whitesmoke">
@@ -116,9 +110,7 @@ const ProductSinglePage = () => {
               <div className="product-img">
                 <div className="product-img-zoom">
                   <img
-                    src={
-                      product.thumbnail
-                    }
+                    src={product.thumbnail}
                     alt=""
                     className="img-cover"
                   />
